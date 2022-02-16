@@ -7,12 +7,13 @@ const {
     GraphQLSchema,
     GraphQLID,
     GraphQLInt,
+    GraphQLList,
 } = graphql;
 
 const lessons = [
-    { id: '1', name: "GraphQl", group: "front"},
-    { id: '2', name: "React", group: "front"},
-    { id: '3', name: "Express", group: "back"},
+    { id: '1', name: "GraphQl", group: "front", teacherId: "1" },
+    { id: '2', name: "React", group: "front", teacherId: "3" },
+    { id: '3', name: "Express", group: "back", teacherId: "2" },
 
 ]
 
@@ -22,21 +23,33 @@ const teachers = [
     { id: '3', name: "Ali Alaei", age: 30},
 ]
 
-const LessonType = new GraphQLObjectType({
-    name: 'Lesson',
-    fields: () => ({
-        id: {type: GraphQLID},
-        name: {type: GraphQLString},
-        group: {type: GraphQLString},
-    })
-})
-
 const TeacherType = new GraphQLObjectType({
-    name: 'Teacher',
+    name: 'teacher',
     fields: () => ({
         id: {type: GraphQLID},
         name: {type: GraphQLString},
         age: {type: GraphQLInt},
+        lessons: {
+            type: new GraphQLList(LessonType),
+            resolve(parent,args) {
+                return lod.filter(lessons,{teacherId: parent.id})
+            }
+        }
+    })
+})
+
+const LessonType = new GraphQLObjectType({
+    name: 'lesson',
+    fields: () => ({
+        id: {type: GraphQLID},
+        name: {type: GraphQLString},
+        group: {type: GraphQLString},
+        teacher: {
+            type: TeacherType,
+            resolve(parent,args){
+                return lod.find(teachers, {id: parent.teacherId})
+            }
+        }
     })
 })
 
