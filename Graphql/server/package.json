@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/mesbah68/ReactTestCase.git"
+    "url": "git+ssh://git@github.com:mesbah68/ReactSnippets.git"
   },
   "author": "Mahsa Mesbah",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mesbah68/ReactTestCase/issues"
+    "url": "https://github.com/mesbah68/ReactSnippets/issues"
   },
-  "homepage": "https://github.com/mesbah68/ReactTestCase#readme",
+  "homepage": "https://github.com/mesbah68/ReactSnippets#readme",
   "dependencies": {
     "express": "^4.17.2",
     "express-graphql": "^0.12.0",

@@ -1,1 +1,1 @@
-# ReactTestCase
+# ReactSnippets
