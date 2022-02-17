@@ -11,6 +11,8 @@ import {
 } from "@apollo/client";
 
 import LessonList from './components/LessonList';
+import TeacherList from './components/TeacherList';
+
 import './App.css';
 
 const client = new ApolloClient({
@@ -22,8 +24,8 @@ function App() {
   return (
       <ApolloProvider client={client}>
           <div className="App">
-            Hello
             <LessonList />
+            <TeacherList />
           </div>
       </ApolloProvider>
   );

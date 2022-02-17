@@ -3,20 +3,19 @@ import React from 'react';
 import { useQuery } from "@apollo/client";
 // import { graphql } from 'react-apollo';
 
-import { getLessonsQuery } from '../queries/index';
+import { getTeachersQuery } from '../queries/index';
 
 
-const LessonList = () => {
-    const { loading, error, data } = useQuery(getLessonsQuery);
+const TeacherList = () => {
+    const { loading, error, data } = useQuery(getTeachersQuery);
 
     if (!loading) {
-        const lessonsItems = data.lessons;
-
+        const teachersItems = data.teachers;
         return (
             <div>
-                <h2>Lessons List</h2>
+                <h2>Teachers List</h2>
                 <ul>
-                    {lessonsItems.map(item => (
+                    {teachersItems.map(item => (
                         <li>{item.id}  {item.name} {item.group}</li>
                     ))}
                 </ul>
@@ -30,4 +29,4 @@ const LessonList = () => {
     
 };
 
-export default LessonList;
+export default TeacherList;

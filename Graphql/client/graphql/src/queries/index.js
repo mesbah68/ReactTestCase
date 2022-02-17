@@ -10,4 +10,14 @@ const getLessonsQuery = gql`
     }
 }
 `
-export { getLessonsQuery };
+
+const getTeachersQuery = gql`
+{
+    teachers{
+        name
+        id
+    }
+}
+`
+
+export { getLessonsQuery, getTeachersQuery };
