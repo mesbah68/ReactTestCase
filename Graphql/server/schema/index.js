@@ -69,6 +69,18 @@ const RootQuery = new GraphQLObjectType ({
             resolve(parent,args) {
                 return lod.find(teachers, {id: args.id})
             }
+        },
+        lessons: {
+            type: new GraphQLList(LessonType),
+            resolve() {
+                return lessons
+            }
+        },
+        teachers: {
+            type: new GraphQLList(TeacherType),
+            resolve() {
+                return teachers
+            }
         }
     }
 })
