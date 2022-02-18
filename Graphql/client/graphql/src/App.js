@@ -12,6 +12,8 @@ import {
 
 import LessonList from './components/LessonList';
 import TeacherList from './components/TeacherList';
+import AddLesson from './components/AddLesson';
+import AddTeacher from './components/AddTeacher';
 
 import './App.css';
 
@@ -26,6 +28,8 @@ function App() {
           <div className="App">
             <LessonList />
             <TeacherList />
+            <AddLesson />
+            <AddTeacher />
           </div>
       </ApolloProvider>
   );

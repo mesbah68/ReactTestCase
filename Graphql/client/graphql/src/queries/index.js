@@ -20,4 +20,20 @@ const getTeachersQuery = gql`
 }
 `
 
-export { getLessonsQuery, getTeachersQuery };
+const addLessonsMutation = gql`
+    mutation AddLesson($name: String!, $id: ID, $group: String!, $teacher: ID ) {
+        addLesson(name: $name, id: $id, group: $group, teacher: $teacher) {
+            name
+        }
+    }
+`;
+
+const addTeacherMutation = gql`
+    mutation AddTeacher($name: String!, $id: ID, $age: String!, $lesson: String! ) {
+        addTeacher(name: $name, id: $id, age: $age, lesson: $lesson) {
+            name
+        }
+    }
+`;
+
+export { getLessonsQuery, getTeachersQuery, addLessonsMutation, addTeacherMutation };

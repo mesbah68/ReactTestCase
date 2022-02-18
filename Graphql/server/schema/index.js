@@ -8,6 +8,7 @@ const {
     GraphQLID,
     GraphQLInt,
     GraphQLList,
+    GraphQLNonNull,
 } = graphql;
 
 const lessons = [
@@ -53,6 +54,50 @@ const LessonType = new GraphQLObjectType({
     })
 })
 
+const Mutation = new GraphQLObjectType({
+    name: "Mutation",
+    fields: {
+        addLesson: {
+            type: LessonType,
+            args: {
+                name: {type: new GraphQLNonNull(GraphQLString)},
+                id: {type: GraphQLID},
+                group: {type: new GraphQLNonNull(GraphQLString)},
+                teacher: {type: GraphQLID},
+            },
+            resolve(parent,args){
+                let lesson = {
+                    name: args.name,
+                    id: args.id,
+                    group: args.group,
+                    teacher: args.teacher
+                };
+                lessons.push(lesson);
+                return lessons;
+            }
+        },
+        addTeacher: {
+            type: TeacherType,
+            args: {
+                name: {type: new GraphQLNonNull(GraphQLString)},
+                id: {type: GraphQLID},
+                age: {type: new GraphQLNonNull(GraphQLString)},
+                lesson: {type: new GraphQLNonNull(GraphQLString)},
+            },
+            resolve(parent,args){
+                let teacher = {
+                    name: args.name,
+                    id: args.id,
+                    age: args.age,
+                    lesson: args.lesson
+                };
+                teachers.push(teacher);
+                return lessons;
+            }
+        }
+    }
+})
+
 const RootQuery = new GraphQLObjectType ({
     name: 'RootQueryType',
     fields: {
@@ -82,9 +127,11 @@ const RootQuery = new GraphQLObjectType ({
                 return teachers
             }
         }
+
     }
 })
 
 module.exports = new GraphQLSchema({
-    query: RootQuery
+    query: RootQuery,
+    mutation: Mutation,
 })

@@ -5,7 +5,6 @@ import { useQuery } from "@apollo/client";
 
 import { getLessonsQuery } from '../queries/index';
 
-
 const LessonList = () => {
     const { loading, error, data } = useQuery(getLessonsQuery);
 
