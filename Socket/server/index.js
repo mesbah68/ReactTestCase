@@ -1,11 +1,11 @@
 import { Server } from 'socket.io';
-import { uuidv4 as uuid } from 'uuid';
+import uuid from 'react-uuid';
 
-const io = new Server(4000,{ 
+const io = new Server(4000, {
     cors: {
         origin: '*',
     }
- });
+});
 
 const users = new Map();
 const messages = [];
@@ -25,7 +25,7 @@ io.on('connection', socket => {
         socket.emit('msg', messages);
 
         // Send updated users list to all users
-        io.emit('users', Array.from(users.values())); 
+        io.emit('users', Array.from(users.values()));
     });
 
     // When a new message is sent 
@@ -35,10 +35,11 @@ io.on('connection', socket => {
         io.emit('msg', messages);
     });
 
-    // When user leaves chat
-    socket.io('disconnect', () => {
-        users.delete(socket.id);
-
-        io.emit('users', Array.from(users.values())); 
-    });
 })
+
+// When user leaves chat
+io.on('disconnect', () => {
+    users.delete(socket.id);
+
+    io.emit('users', Array.from(users.values()));
+});
