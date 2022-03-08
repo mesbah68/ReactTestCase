@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Form, Input, Button } from 'antd';
 
-import Message from "./Message";
+import Message from "../Message";
 
 const Messages = ({socket}) => {
     const [messages, setMessages] = useState([]);

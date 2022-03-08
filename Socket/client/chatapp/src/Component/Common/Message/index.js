@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Form, Input, Button } from 'antd';
-import Context from "./Context";
+import Context from "../../../Context";
 
 const Message = ({msg}) => {
     const { user } = useContext(Context);

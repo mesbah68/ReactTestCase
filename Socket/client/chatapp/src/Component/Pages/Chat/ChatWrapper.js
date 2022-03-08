@@ -1,16 +1,16 @@
 // ignore eslint
 import React, { useContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import Context from "./Context";
+import Context from "../../../Context";
 
 import { Col,Row } from 'antd';
 
-import EnterChatForm from "./EnterChatForm";
-import Users from "./Users";
-import NewMessageForm from "./NewMessageForm";
-import Messages from "./Messages";
+import EnterChatForm from "../../Common/EnterChatForm";
+import Users from "../../Common/Users";
+import NewMessageForm from "../../Common/NewMessageForm";
+import Messages from "../../Common/Messages";
 
-const Container = () => {
+const ChatWrapper = () => {
     const { user, setUser } = useContext(Context);
     const [socket, setSocket] = useState(null);
 
@@ -45,4 +45,4 @@ const Container = () => {
     )
 };
 
-export default Container;
+export default ChatWrapper;

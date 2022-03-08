@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Form, Input, Button } from 'antd';
-import Context from "./Context";
+import Context from "../../../Context";
 
 const NewMessageForm = ({socket}) => {
     const { user } = useContext(Context);

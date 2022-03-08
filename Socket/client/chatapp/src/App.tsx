@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Context from "./Context";
 
-import Container from "./Container";
+import ChatWrapper from "./Component/Pages/Chat/ChatWrapper";
 
 import "./index.scss";
 import 'antd/dist/antd.css'
@@ -16,7 +16,7 @@ function App() {
 
   return (
     <Context.Provider value={store}>
-      <Container />
+      <ChatWrapper />
     </Context.Provider>
   );
 }

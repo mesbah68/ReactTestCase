@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Form, Input, Button } from 'antd';
-import Context from "./Context";
+import Context from "../../../Context";
+
+import { StyledChatformWrapper } from "./style";
 
 const EnterChatForm = ({socket}) => {
     const { setUser } = useContext(Context);
@@ -21,7 +23,7 @@ const EnterChatForm = ({socket}) => {
     }
 
     return (
-        <div>
+        <StyledChatformWrapper>
             <Form
                 autoComplete="off"
             >
@@ -30,7 +32,7 @@ const EnterChatForm = ({socket}) => {
                     Submit
                 </Button>
             </Form>
-        </div>
+        </StyledChatformWrapper>
     )
 };
 

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Form, Input, Button } from 'antd';
 
-import User from "./User";
+import User from "../User";
 
 const Users = ({socket}) => {
     const [users, setUsers] = useState([]);
