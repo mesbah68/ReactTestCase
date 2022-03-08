@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import Context from "../../../Context";
 
-import { Col,Row } from 'antd';
+import { Col, Row, Typography } from 'antd';
 
 import EnterChatForm from "../../Common/EnterChatForm";
 import Users from "../../Common/Users";
@@ -13,6 +13,7 @@ import Messages from "../../Common/Messages";
 const ChatWrapper = () => {
     const { user, setUser } = useContext(Context);
     const [socket, setSocket] = useState(null);
+    const { Title } = Typography;
 
     useEffect(() => {
         const newSocket = io("http://localhost:4000");
@@ -21,10 +22,10 @@ const ChatWrapper = () => {
     }, []);
     
     return (
-        <div>
-            <h1>
+        <div className="font-face-gb">
+            <Title level={2}>
                 {user ? `chatting as ${user.name} ` : 'chat as ...'}
-            </h1>
+            </Title>
             {user && socket && socket.connected ? (
                 <Row>
                     <Col span={12}>
