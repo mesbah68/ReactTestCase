@@ -4,6 +4,7 @@ import Context from "./Context";
 import Container from "./Container";
 
 import "./index.scss";
+import 'antd/dist/antd.css'
 
 function App() {
   const [user, setUser] = useState("");
