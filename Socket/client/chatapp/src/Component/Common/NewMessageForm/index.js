@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Form, Input, Button } from 'antd';
+import { SendLightIcon } from '@iconbox/iconly'; 
 import Context from "../../../Context";
+
+import { StyledMessageWrapper } from "./style";
 
 const NewMessageForm = ({socket}) => {
     const { user } = useContext(Context);
@@ -13,16 +16,16 @@ const NewMessageForm = ({socket}) => {
     }
 
     return (
-        <div>
+        <StyledMessageWrapper>
             <Form
                 autoComplete="off"
+                onFinish={sendMsg}
             >
-                <Input onChange={e => setMessage(e.target.value)} value={message} />
-                <Button type="primary" htmlType="submit" onClick={sendMsg}>
-                    Submit
-                </Button>
+                <Input onChange={e => setMessage(e.target.value)} placeholder="Type Something..." value={message} />
+                <Button icon={<SendLightIcon size={3} />} onClick={sendMsg} htmlType="submit" />
+                
             </Form>
-        </div>
+        </StyledMessageWrapper>
     )
 };
 

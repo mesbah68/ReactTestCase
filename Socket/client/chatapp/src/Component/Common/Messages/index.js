@@ -3,6 +3,8 @@ import { Form, Input, Button } from 'antd';
 
 import Message from "../Message";
 
+import { StyledMessagesWrapper, StyledMessageItem } from "./style";
+
 const Messages = ({socket}) => {
     const [messages, setMessages] = useState([]);
 
@@ -11,15 +13,15 @@ const Messages = ({socket}) => {
             setMessages(messages);
         });
     }, [socket])
-
+console.log(messages);
     return (
-        <ul>
+        <StyledMessagesWrapper>
             {messages.map((message,index) => (
-                <li>
+                <StyledMessageItem>
                     <Message key={index} msg={message} />
-                </li>
+                </StyledMessageItem>
             ))}
-        </ul>
+        </StyledMessagesWrapper>
     )
 };
 

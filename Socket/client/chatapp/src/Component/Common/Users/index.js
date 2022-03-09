@@ -3,6 +3,8 @@ import { Form, Input, Button } from 'antd';
 
 import User from "../User";
 
+import { StyledUserWrapper, StyledUserItem } from "./style";
+
 const Users = ({socket}) => {
     const [users, setUsers] = useState([]);
 
@@ -13,13 +15,13 @@ const Users = ({socket}) => {
     }, [socket])
 
     return (
-        <ul>
+        <StyledUserWrapper>
             {users.map((user,index) => (
-                <li key={index}>
+                <StyledUserItem key={index}>
                     <User user={user} />
-                </li>
+                </StyledUserItem>
             ))}
-        </ul>
+        </StyledUserWrapper>
     )
 };
 

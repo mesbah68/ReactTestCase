@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Form, Input, Button } from 'antd';
+// import { LoginIcon } from '@iconbox/tabler'; 
 import Context from "../../../Context";
 
 import { StyledChatFormWrapper } from "./style";
@@ -27,9 +28,10 @@ const EnterChatForm = ({socket}) => {
             <Form
                 autoComplete="off"
             >
-                <Input onChange={e => setLocalUser(e.target.value)} value={localUser} />
+                <Input onChange={e => setLocalUser(e.target.value)} placeholder="Name" value={localUser} />
                 <Button type="primary" htmlType="submit" onClick={handleEnterChatroom}>
-                    Submit
+                    {/* <LoginIcon /> */}
+                    Enter...
                 </Button>
             </Form>
         </StyledChatFormWrapper>

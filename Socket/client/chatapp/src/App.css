@@ -1,3 +1,13 @@
 .font-face-gb {
     font-family: "GilroyBlack";
    }
+
+.bg-blue {
+    background-color: #edf2fe;
+    color: #686868;
+}   
+.bg-purple {
+    background-color: #8d4fff;
+    color: #fff;
+    float: right;
+}

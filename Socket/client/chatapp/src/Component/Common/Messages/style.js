@@ -1,7 +1,13 @@
 import Styled from 'styled-components';
 
-export const StyledChatFormWrapper = Styled.div`
-  
+export const StyledMessagesWrapper = Styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+`;
+
+export const StyledMessageItem = Styled.div`
+    
 `;
 
 
