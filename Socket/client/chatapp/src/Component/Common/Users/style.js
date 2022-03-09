@@ -7,6 +7,14 @@ export const StyledUserWrapper = Styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
+  button {
+    margin-left: 10px;
+    border-radius: 15px;
+    font-size: 16px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
 `;
 
 export const StyledUserItem = Styled.div`

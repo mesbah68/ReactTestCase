@@ -6,7 +6,6 @@ export const StyledMessageItem = Styled.div`
     height: auto;
     display: inline-block;
     padding: 10px;
-    border-radius: 10px 3px;
   }
 `;
 

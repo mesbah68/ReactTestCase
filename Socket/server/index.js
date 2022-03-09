@@ -35,11 +35,11 @@ io.on('connection', socket => {
         io.emit('msg', messages);
     });
 
-})
-
-// When user leaves chat
-io.on('disconnect', () => {
-    users.delete(socket.id);
+    // When user leaves chat
+    socket.on('disconnect', () => {
+        users.delete(socket.id);
 
     io.emit('users', Array.from(users.values()));
 });
+
+})

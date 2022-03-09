@@ -20,6 +20,9 @@ export const StyledMessageWrapper = Styled.div`
         button {
             border: none;
             background-color: transparent;
+            &:hover {
+                background-color: transparent;
+            }
         }
         svg {
             margin-left: 10px;

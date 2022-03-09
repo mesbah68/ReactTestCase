@@ -34,7 +34,7 @@ const ChatWrapper = () => {
                             <Avatar src="https://joeschmoe.io/api/v1/random" icon={<UserOutlined />} size="large" />
                             <span>{user.name}</span>
                         </StyledAvatarWrapper>  
-                        : 'chat as ...'}
+                        : 'Chat'}
                     </Title>
                     {user && socket && socket.connected ? (
                         <Row>
@@ -44,7 +44,6 @@ const ChatWrapper = () => {
                             <Col span={12}>
                                 <StyledMessageWrapper>
                                     <Messages socket={socket} />
-                                    
                                 </StyledMessageWrapper>
                                 <NewMessageForm socket={socket} />
                             </Col>

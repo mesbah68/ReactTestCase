@@ -13,7 +13,7 @@ const Messages = ({socket}) => {
             setMessages(messages);
         });
     }, [socket])
-console.log(messages);
+
     return (
         <StyledMessagesWrapper>
             {messages.map((message,index) => (

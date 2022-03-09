@@ -5,9 +5,11 @@
 .bg-blue {
     background-color: #edf2fe;
     color: #686868;
+    border-radius: 10px 10px 10px 0;
 }   
 .bg-purple {
     background-color: #8d4fff;
     color: #fff;
     float: right;
+    border-radius: 10px 10px 0 10px;
 }

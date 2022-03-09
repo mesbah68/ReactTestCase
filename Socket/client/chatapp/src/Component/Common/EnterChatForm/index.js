@@ -27,9 +27,10 @@ const EnterChatForm = ({socket}) => {
         <StyledChatFormWrapper>
             <Form
                 autoComplete="off"
+                onFinish={handleEnterChatroom}
             >
                 <Input onChange={e => setLocalUser(e.target.value)} placeholder="Name" value={localUser} />
-                <Button type="primary" htmlType="submit" onClick={handleEnterChatroom}>
+                <Button shape="primary" htmlType="submit" onClick={handleEnterChatroom}>
                     {/* <LoginIcon /> */}
                     Enter...
                 </Button>
