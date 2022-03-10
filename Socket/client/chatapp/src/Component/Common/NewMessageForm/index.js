@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Form, Input, Button } from 'antd';
-import { SendLightIcon } from '@iconbox/iconly'; 
+import { SendLightIcon } from '@iconbox/iconly';
 import Context from "../../../Context";
 
 import { StyledMessageWrapper } from "./style";
 
-const NewMessageForm = ({socket}) => {
+const NewMessageForm = ({ socket }) => {
     const { user } = useContext(Context);
     const [message, setMessage] = useState('');
 
     const sendMsg = (e) => {
         e.preventDefault();
-        socket.emit('msg', {user, message});
+        socket.emit('msg', { user, message });
         setMessage('');
     }
 
@@ -23,7 +23,7 @@ const NewMessageForm = ({socket}) => {
             >
                 <Input onChange={e => setMessage(e.target.value)} placeholder="Type Something..." value={message} />
                 <Button icon={<SendLightIcon size={3} />} onClick={sendMsg} htmlType="submit" />
-                
+
             </Form>
         </StyledMessageWrapper>
     )

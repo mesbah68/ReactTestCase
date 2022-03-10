@@ -39,7 +39,7 @@ io.on('connection', socket => {
     socket.on('disconnect', () => {
         users.delete(socket.id);
 
-    io.emit('users', Array.from(users.values()));
-});
+        io.emit('users', Array.from(users.values()));
+    });
 
 })

@@ -7,7 +7,7 @@ import User from "../User";
 
 import { StyledUserWrapper, StyledUserItem } from "./style";
 
-const Users = ({socket}) => {
+const Users = ({ socket }) => {
     const [users, setUsers] = useState([]);
     const { setUser } = useContext(Context);
 
@@ -24,7 +24,7 @@ const Users = ({socket}) => {
 
     return (
         <StyledUserWrapper>
-            {users.map((user,index) => (
+            {users.map((user, index) => (
                 <StyledUserItem key={index}>
                     <User user={user} />
                 </StyledUserItem>
