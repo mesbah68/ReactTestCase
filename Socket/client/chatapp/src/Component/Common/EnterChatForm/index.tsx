@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { MouseEvent } from "react";
 import { Form, Input, Button } from "antd";
 // import { LoginIcon } from '@iconbox/tabler';
 import Context from "../../../Context";
@@ -23,7 +22,7 @@ const EnterChatForm = ({ socket }: Props) => {
     });
   }, [socket]);
 
-  const handleEnterChatroom = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleEnterChatroom = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(socket);
     console.log(localUser);

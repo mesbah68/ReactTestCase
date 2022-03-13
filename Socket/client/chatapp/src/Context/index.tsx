@@ -3,7 +3,7 @@ import { createContext } from "react";
 interface ChatContextInterface {
   user: any;
   setUser: Function;
-  messages: Object;
+  messages: any;
   setMessages: Function;
 }
 

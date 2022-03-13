@@ -7,6 +7,7 @@ interface MessageProp {
   msg: {
     user: {
       id: string;
+      name?: string;
     };
     message: string;
   };
@@ -14,7 +15,6 @@ interface MessageProp {
 
 const Message = ({ msg }: MessageProp) => {
   const { user } = useContext(Context);
-
   const isCurrentUser = user.id === msg.user.id;
 
   return (
