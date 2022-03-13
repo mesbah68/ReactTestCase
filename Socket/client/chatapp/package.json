@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@iconbox/iconly": "^2.3.0",
+    "@iconbox/ion": "^2.0.1",
+    "@iconbox/jamicons": "^2.0.1",
     "@iconbox/tabler": "^2.0.3",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
@@ -13,6 +15,7 @@
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.13",
     "antd": "^4.19.1",
+    "emoji-picker-react": "^3.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.2",
