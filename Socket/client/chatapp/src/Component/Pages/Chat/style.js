@@ -1,14 +1,24 @@
-import Styled from 'styled-components';
+import Styled from "styled-components";
 
 export const StyledChatWrapper = Styled.div`
+    padding: 40px;
+    margin-top: 50px;
+    background-color: #f1f4ff;
+    border-radius: 10px;
+`;
+export const StyledChatInner = Styled.div`
     display: flex;
     flex-direction: column;
     align-items: left;
-    background-color: #f1f4ff;
-    border-radius: 30px;
-    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
     height: 50rem;
-    margin-top: 50px;
+    > div {
+        height: 100%;
+        > div {
+            height: 100%
+        }
+    }
 `;
 export const StyledAvatarWrapper = Styled.div`
     display: flex;
@@ -21,8 +31,14 @@ export const StyledMessageWrapper = Styled.div`
     display: flex;
     flex-direction: column;
     position: relative;
-    border-radius: 20px;
-    height: 39rem;
+    height: 100%;
+    background-color: #f1f4ff;
+`;
+export const StyledMessageContent = Styled.div`
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
     background-color: #fafcff;
     overflow: auto;
     scrollbar-width: none; 
@@ -30,6 +46,19 @@ export const StyledMessageWrapper = Styled.div`
     display: none;
   }
 `;
-
-
-
+export const StyledChatRoomHeader = Styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px 10px;
+  margin-left: 1px;
+  margin-bottom: 2px;
+  border-radius: 0 15px 0 0;
+  h5 {
+      margin: 0;
+  }
+  svg {
+      margin: 0 10px;
+  }
+`;

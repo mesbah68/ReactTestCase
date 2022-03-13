@@ -5,17 +5,31 @@ import Context from "../../../Context";
 
 import { Col, Row, Typography, Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+// @ts-ignore
+import {
+  SendLightIcon,
+  ArrowDown2LightIcon,
+  ChatCurvedIcon,
+  // @ts-ignore
+} from "@iconbox/iconly";
 
 import EnterChatForm from "../../Common/EnterChatForm";
-import Users from "../../Common/Users";
+import ChatLists from "../../Common/ChatLists";
 import NewMessageForm from "../../Common/NewMessageForm";
 import Messages from "../../Common/Messages";
 
 import {
   StyledChatWrapper,
+  StyledChatInner,
   StyledAvatarWrapper,
+  StyledMessageContent,
+  StyledChatRoomHeader,
   StyledMessageWrapper,
 } from "./style";
+
+interface Props {
+  chatRoomTitle: string;
+}
 
 interface Socket {
   connected: boolean;
@@ -24,7 +38,7 @@ interface Socket {
   emit: Function;
 }
 
-const ChatWrapper = () => {
+const ChatWrapper = ({ chatRoomTitle }: Props) => {
   const { user, setUser } = useContext(Context);
   const [socket, setSocket] = useState<Socket>({
     connected: false,
@@ -43,39 +57,48 @@ const ChatWrapper = () => {
   return (
     <Row className="ant-row ant-row-center">
       <Col span={12}>
-        <StyledChatWrapper className="font-face-gb">
-          <Title level={2}>
-            {user ? (
-              <StyledAvatarWrapper>
-                <Avatar
-                  src="https://joeschmoe.io/api/v1/random"
-                  icon={<UserOutlined />}
-                  size="large"
-                />
-                <span>{user.name}</span>
-              </StyledAvatarWrapper>
-            ) : (
-              "Chat"
-            )}
-          </Title>
-          {user && socket && socket.connected ? (
-            <Row>
-              <Col span={12}>
-                <Users socket={socket} />
-              </Col>
-              <Col span={12}>
-                <StyledMessageWrapper>
-                  <Messages socket={socket} />
-                </StyledMessageWrapper>
-                <NewMessageForm socket={socket} />
-              </Col>
-            </Row>
-          ) : null}
-          {!user && socket ? (
-            <div>
-              <EnterChatForm socket={socket} />
-            </div>
-          ) : null}
+        <StyledChatWrapper>
+          <StyledChatInner className="font-face-gb">
+            {/* <Title level={2}>
+              {user ? (
+                <StyledAvatarWrapper>
+                  <Avatar
+                    src="https://joeschmoe.io/api/v1/random"
+                    icon={<UserOutlined />}
+                    size="large"
+                  />
+                  <span>{user.name}</span>
+                </StyledAvatarWrapper>
+              ) : (
+                "Chat"
+              )}
+            </Title> */}
+            {user && socket && socket.connected ? (
+              <Row>
+                <Col span={8}>
+                  <ChatLists socket={socket} />
+                </Col>
+                <Col span={16}>
+                  <StyledMessageWrapper>
+                    <StyledChatRoomHeader>
+                      <ChatCurvedIcon />
+                      <Title level={5}>{chatRoomTitle}</Title>
+                      <ArrowDown2LightIcon />
+                    </StyledChatRoomHeader>
+                    <StyledMessageContent>
+                      <Messages socket={socket} />
+                    </StyledMessageContent>
+                  </StyledMessageWrapper>
+                  <NewMessageForm socket={socket} />
+                </Col>
+              </Row>
+            ) : null}
+            {!user && socket ? (
+              <div>
+                <EnterChatForm socket={socket} />
+              </div>
+            ) : null}
+          </StyledChatInner>
         </StyledChatWrapper>
       </Col>
     </Row>

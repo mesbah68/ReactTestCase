@@ -1,7 +1,8 @@
-import Styled from 'styled-components';
+import Styled from "styled-components";
 
 export const StyledUserWrapper = Styled.div`
-  height: 43rem;
+  height: 100%;
+  padding: 10px;
   overflow: auto;
   scrollbar-width: none; 
   ::-webkit-scrollbar {
@@ -28,5 +29,3 @@ export const StyledUserItem = Styled.div`
   margin-bottom: 10px;
 }
 `;
-
-

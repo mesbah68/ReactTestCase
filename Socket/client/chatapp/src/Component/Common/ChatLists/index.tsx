@@ -20,17 +20,18 @@ const Users = ({ socket }: Props) => {
       name: string;
     }>
   >([]);
-  const { setUser } = useContext(Context);
+  const { setUser, setMessages, messages } = useContext(Context);
 
   useEffect(() => {
     socket.on("users", (users: any) => {
       setUsers(users);
     });
   }, [socket]);
-
+  console.log(messages);
   const handleLogout = (e: React.FormEvent) => {
     e.preventDefault();
     setUser(null);
+    setMessages(null);
   };
 
   return (

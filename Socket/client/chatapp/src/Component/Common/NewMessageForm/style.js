@@ -1,11 +1,11 @@
-import Styled from 'styled-components';
+import Styled from "styled-components";
 
 export const StyledMessageWrapper = Styled.div`
     display: flex;
     align-items: center;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 10px;
+    left: 10px;
     right: 20px;
     form {
         display: flex;
@@ -29,5 +29,3 @@ export const StyledMessageWrapper = Styled.div`
         }
     }
 `;
-
-
