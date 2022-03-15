@@ -7,7 +7,6 @@ export const StyledChatFormWrapper = Styled.div`
 export const StyledAvatarWrapper = Styled.div`
     display: flex;
     align-items: center;
-    padding: 5px !important;
     span {
        
     }

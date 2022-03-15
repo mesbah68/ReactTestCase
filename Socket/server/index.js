@@ -9,7 +9,6 @@ const io = new Server(4000, {
 
 const users = new Map();
 const messages = [];
-console.log("sdsdvsdv");
 io.on("connection", (socket) => {
   // When a new user enter chat
   socket.on("user", (user) => {

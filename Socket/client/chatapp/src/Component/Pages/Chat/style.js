@@ -20,12 +20,6 @@ export const StyledChatInner = Styled.div`
         }
     }
 `;
-export const StyledAvatarWrapper = Styled.div`
-    display: flex;
-    span {
-        margin-left: 10px;
-    }
-`;
 
 export const StyledMessageWrapper = Styled.div`
     display: flex;

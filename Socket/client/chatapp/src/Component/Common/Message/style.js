@@ -16,6 +16,12 @@ export const StyledMessageText = Styled.div`
   position: relative;
   align-items: end;
   max-width: 75%;
+  margin-left: 10px;
+  div {
+    &.bg-blue {
+      margin-right: 10px;
+    }
+  }
   span {
     position: absolute;
     bottom: -20px;

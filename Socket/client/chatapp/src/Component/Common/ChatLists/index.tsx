@@ -1,11 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button } from "antd";
+import { Button, Typography, Avatar, Input } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+// @ts-ignore
+import { MenuIcon } from "@iconbox/jamicons";
+// @ts-ignore
+import { SearchOutlineIcon } from "@iconbox/eva";
 
 import Context from "../../../Context";
+import Channels from "./Channels";
 
-import User from "../User";
-
-import { StyledUserWrapper, StyledUserItem } from "./style";
+import {
+  StyledChatListWrapper,
+  StyledAvatarWrapper,
+  StyledUserName,
+  StyledSearchWrapper,
+} from "./style";
 
 interface Props {
   socket: {
@@ -13,21 +22,24 @@ interface Props {
   };
 }
 
-const Users = ({ socket }: Props) => {
+const ChatList = ({ socket }: Props) => {
   const [users, setUsers] = useState<
     Array<{
       id: string;
       name: string;
     }>
   >([]);
-  const { setUser, setMessages, messages } = useContext(Context);
+  const { user, setUser, setMessages, messages } = useContext(Context);
+
+  const { Title } = Typography;
+  const channelsCount = "120";
 
   useEffect(() => {
     socket.on("users", (users: any) => {
       setUsers(users);
     });
   }, [socket]);
-  console.log(messages);
+
   const handleLogout = (e: React.FormEvent) => {
     e.preventDefault();
     setUser(null);
@@ -35,17 +47,32 @@ const Users = ({ socket }: Props) => {
   };
 
   return (
-    <StyledUserWrapper>
-      {users.map((user: any, index: number) => (
-        <StyledUserItem key={index}>
-          <User user={user} />
-        </StyledUserItem>
-      ))}
+    <StyledChatListWrapper>
+      <Title level={4}>
+        {user ? (
+          <StyledAvatarWrapper>
+            <Avatar
+              src="https://joeschmoe.io/api/v1/random"
+              icon={<UserOutlined />}
+              size="large"
+            />
+            <StyledUserName>{user.name}</StyledUserName>
+            <MenuIcon size={2.5} />
+          </StyledAvatarWrapper>
+        ) : (
+          "Chat"
+        )}
+      </Title>
+      <StyledSearchWrapper>
+        <Input placeholder="Search" />
+        <SearchOutlineIcon size={3} onClick={() => {}} />
+      </StyledSearchWrapper>
+      <Channels socket={socket} count={channelsCount} />
       <Button type="primary" onClick={handleLogout}>
         Logout
       </Button>
-    </StyledUserWrapper>
+    </StyledChatListWrapper>
   );
 };
 
-export default Users;
+export default ChatList;

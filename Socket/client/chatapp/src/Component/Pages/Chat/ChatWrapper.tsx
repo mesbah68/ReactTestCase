@@ -3,11 +3,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import Context from "../../../Context";
 
-import { Col, Row, Typography, Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { Col, Row, Typography } from "antd";
 // @ts-ignore
 import {
-  SendLightIcon,
   ArrowDown2LightIcon,
   ChatCurvedIcon,
   // @ts-ignore
@@ -21,7 +19,6 @@ import Messages from "../../Common/Messages";
 import {
   StyledChatWrapper,
   StyledChatInner,
-  StyledAvatarWrapper,
   StyledMessageContent,
   StyledChatRoomHeader,
   StyledMessageWrapper,
@@ -59,20 +56,6 @@ const ChatWrapper = ({ chatRoomTitle }: Props) => {
       <Col span={12}>
         <StyledChatWrapper>
           <StyledChatInner className="font-face-gb">
-            {/* <Title level={2}>
-              {user ? (
-                <StyledAvatarWrapper>
-                  <Avatar
-                    src="https://joeschmoe.io/api/v1/random"
-                    icon={<UserOutlined />}
-                    size="large"
-                  />
-                  <span>{user.name}</span>
-                </StyledAvatarWrapper>
-              ) : (
-                "Chat"
-              )}
-            </Title> */}
             {user && socket && socket.connected ? (
               <Row>
                 <Col span={8}>
