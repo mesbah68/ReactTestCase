@@ -1,6 +1,7 @@
-import Styled from 'styled-components';
+import Styled from "styled-components";
 
 export const StyledChatFormWrapper = Styled.div`
+  padding: 20px;
   input {
       width: 300px;
       border-radius: 15px;
@@ -11,5 +12,3 @@ export const StyledChatFormWrapper = Styled.div`
       font-size: 16px;
   }
 `;
-
-

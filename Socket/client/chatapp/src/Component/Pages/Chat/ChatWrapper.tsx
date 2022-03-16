@@ -64,9 +64,10 @@ const ChatWrapper = ({ chatRoomTitle }: Props) => {
                 <Col span={16}>
                   <StyledMessageWrapper>
                     <StyledChatRoomHeader>
-                      <ChatCurvedIcon />
-                      <Title level={5}>{chatRoomTitle}</Title>
-                      <ArrowDown2LightIcon />
+                      <Title level={5}>
+                        <span>💬 </span>
+                        {chatRoomTitle}
+                      </Title>
                     </StyledChatRoomHeader>
                     <StyledMessageContent>
                       <Messages socket={socket} />

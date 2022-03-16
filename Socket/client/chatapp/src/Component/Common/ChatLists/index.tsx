@@ -8,12 +8,14 @@ import { SearchOutlineIcon } from "@iconbox/eva";
 
 import Context from "../../../Context";
 import Channels from "./Channels";
+import Group from "../Group";
 
 import {
   StyledChatListWrapper,
   StyledAvatarWrapper,
   StyledUserName,
   StyledSearchWrapper,
+  StyledSystemWrapper,
 } from "./style";
 
 interface Props {
@@ -68,9 +70,11 @@ const ChatList = ({ socket }: Props) => {
         <SearchOutlineIcon size={3} onClick={() => {}} />
       </StyledSearchWrapper>
       <Channels socket={socket} count={channelsCount} />
-      <Button type="primary" onClick={handleLogout}>
-        Logout
-      </Button>
+      <StyledSystemWrapper>
+        <Title level={5}>SYSTEM</Title>
+        <Group title="General Setting" icon="⚙️" />
+        <Group title="Logout" onClick={handleLogout} icon="🔴" />
+      </StyledSystemWrapper>
     </StyledChatListWrapper>
   );
 };

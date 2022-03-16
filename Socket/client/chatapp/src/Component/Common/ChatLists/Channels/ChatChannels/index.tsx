@@ -1,17 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Button, Typography, Avatar, Input } from "antd";
+import React, { useEffect, useState } from "react";
 // @ts-ignore
 import { ArrowDown2TwoToneIcon, ArrowUp2TwoToneIcon } from "@iconbox/iconly";
+// @ts-ignore
+import { StarFillIcon } from "@iconbox/eva";
 
-import Context from "../../../../../Context";
+import Group from "../../../Group";
 
-import User from "../../../User";
-
-import {
-  StyledChatChannelsWrapper,
-  StyledUserItem,
-  StyledHeaderWrapper,
-} from "./style";
+import { StyledChatChannelsWrapper, StyledHeaderWrapper } from "./style";
 
 interface Props {
   socket: {
@@ -35,30 +30,32 @@ const ChatChannels = ({ socket, count }: Props) => {
     });
   }, [socket]);
 
-  const handleIconChange = (e: React.FormEvent) => {
+  const handleChangeIcon = (e: React.FormEvent) => {
     e.preventDefault();
     setToggleIcon(!toggleIcon);
-    console.log(toggleIcon);
   };
-  console.log(toggleIcon);
 
   return (
     <StyledChatChannelsWrapper>
       <StyledHeaderWrapper>
         <span>CHAT CHANNELS</span>
         {toggleIcon ? (
-          <ArrowUp2TwoToneIcon onClick={handleIconChange} />
+          <ArrowUp2TwoToneIcon onClick={handleChangeIcon} />
         ) : (
-          <ArrowDown2TwoToneIcon onClick={handleIconChange} />
+          <ArrowDown2TwoToneIcon onClick={handleChangeIcon} />
         )}
       </StyledHeaderWrapper>
-      {toggleIcon
-        ? users.map((user: any, index: number) => (
-            <StyledUserItem key={index}>
-              <User user={user} />
-            </StyledUserItem>
-          ))
-        : ""}
+      {toggleIcon ? (
+        <>
+          <Group title="Share-Ukhtae" icon="😻" detail={<StarFillIcon />} />
+          <Group title="General Chat" icon="💬" className="chat-icon" />
+          <Group title="Introducing" icon="👋" />
+          <Group title="Gibahin-Dribbble" icon="😂" />
+          <Group title="Share-Shot" icon="👍" />
+        </>
+      ) : (
+        ""
+      )}
     </StyledChatChannelsWrapper>
   );
 };

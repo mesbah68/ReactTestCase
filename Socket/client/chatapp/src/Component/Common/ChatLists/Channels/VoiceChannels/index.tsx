@@ -1,12 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Button, Typography, Avatar, Input } from "antd";
-
-// import Context from "../../../../Context";
-
-// import User from "../../../../User";
+import React, { useEffect, useState } from "react";
 
 import {
-  StyledChannelsWrapper,
+  ArrowDown2TwoToneIcon,
+  ArrowUp2TwoToneIcon,
+  VolumeUpCurvedIcon,
+  Voice1CurvedIcon,
+  // @ts-ignore
+} from "@iconbox/iconly";
+
+import User from "../../../User";
+import Group from "../../../Group";
+
+import {
+  StyledVoiceChannelsWrapper,
   StyledUserItem,
   StyledHeaderWrapper,
 } from "./style";
@@ -15,7 +21,7 @@ interface Props {
   socket: {
     on: Function;
   };
-  count: string;
+  count?: string;
 }
 
 const VoiceChannels = ({ socket, count }: Props) => {
@@ -25,6 +31,7 @@ const VoiceChannels = ({ socket, count }: Props) => {
       name: string;
     }>
   >([]);
+  const [toggleIcon, setToggleIcon] = useState(true);
 
   useEffect(() => {
     socket.on("users", (users: any) => {
@@ -32,18 +39,36 @@ const VoiceChannels = ({ socket, count }: Props) => {
     });
   }, [socket]);
 
+  const handleChangeIcon = (e: React.FormEvent) => {
+    e.preventDefault();
+    setToggleIcon(!toggleIcon);
+  };
+
   return (
-    <StyledChannelsWrapper>
+    <StyledVoiceChannelsWrapper>
       <StyledHeaderWrapper>
-        <span>CHANNELS</span>
-        <span>{count}</span>
+        <span>VOICE CHANNELS</span>
+        {toggleIcon ? (
+          <ArrowUp2TwoToneIcon onClick={handleChangeIcon} />
+        ) : (
+          <ArrowDown2TwoToneIcon onClick={handleChangeIcon} />
+        )}
       </StyledHeaderWrapper>
-      {/* {users.map((user: any, index: number) => (
-        <StyledUserItem key={index}>
-          <User user={user} />
-        </StyledUserItem>
-      ))} */}
-    </StyledChannelsWrapper>
+      {toggleIcon
+        ? users.map((user: any, index: number) => (
+            <StyledUserItem key={index}>
+              <User user={user} icon={<VolumeUpCurvedIcon size={2} />} />
+            </StyledUserItem>
+          ))
+        : ""}
+      {toggleIcon && (
+        <>
+          <Group title="Podchess" icon="🎤" detail="3/5" />
+          <Group title="Design Terus" icon="🎨" detail="0/5" />
+          <Group title="Bincang Caem" icon="🤑" detail="0/5" />
+        </>
+      )}
+    </StyledVoiceChannelsWrapper>
   );
 };
 

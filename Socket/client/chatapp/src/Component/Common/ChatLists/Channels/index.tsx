@@ -1,6 +1,7 @@
 import React from "react";
 
 import ChatChannels from "./ChatChannels";
+import VoiceChannels from "./VoiceChannels";
 
 import { StyledChannelsWrapper, StyledHeaderWrapper } from "./style";
 
@@ -19,6 +20,7 @@ const Channels = ({ socket, count }: Props) => {
         <span>{count}</span>
       </StyledHeaderWrapper>
       <ChatChannels socket={socket} />
+      <VoiceChannels socket={socket} />
     </StyledChannelsWrapper>
   );
 };

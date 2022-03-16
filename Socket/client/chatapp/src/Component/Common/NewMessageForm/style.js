@@ -11,12 +11,13 @@ export const StyledMessageWrapper = Styled.div`
         display: flex;
         flex-direction: row;
         align-items: center;
-        width: 100%;
         position: relative;
+        width: 100%;
         input {
             border-radius: 50px;
             height: 65px;
             width: 100%;
+            padding-left: 50px;
         }
         button {
             border: none;
@@ -35,7 +36,7 @@ export const StyledMessageWrapper = Styled.div`
             }
             &.attach {
                 right: 60px;
-                background-color: transparent;
+                background-color: #fff;
                 svg {
                     fill: gray
                 }
@@ -44,5 +45,20 @@ export const StyledMessageWrapper = Styled.div`
         svg {
             fill: #fff
         }
+    }
+`;
+export const StyledEmojiPickerWrapper = Styled.div`
+    display: flex;
+    position: absolute;
+    left: -65%;
+    bottom: 0;
+`;
+export const StyledEmojiIcon = Styled.span`
+    position: absolute;
+    left: 20px;
+    cursor: pointer;
+    img {
+        width: 20px;
+        height: 20px;
     }
 `;

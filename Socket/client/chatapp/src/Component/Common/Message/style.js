@@ -24,7 +24,7 @@ export const StyledMessageText = Styled.div`
   }
   span {
     position: absolute;
-    bottom: -20px;
+    bottom: -25px;
     left: 0;
     min-width: 50px;
     color: #ccc;
@@ -34,7 +34,6 @@ export const StyledMessageText = Styled.div`
     }
   }
   > div {
-    margin-bottom: 10px;
     height: auto;
     display: inline-block;
     padding: 10px;

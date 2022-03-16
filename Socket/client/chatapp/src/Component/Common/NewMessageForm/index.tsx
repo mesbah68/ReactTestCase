@@ -4,10 +4,18 @@ import { Form, Input, Button } from "antd";
 import { PaperPlaneIcon } from "@iconbox/ion";
 // @ts-ignore
 import { AttachmentIcon } from "@iconbox/jamicons";
+// @ts-ignore
+import { Picker } from "emoji-mart";
+import "emoji-mart/css/emoji-mart.css";
+import HappyIcon from "../../../assets/images/happy.png";
 
 import Context from "../../../Context";
 
-import { StyledMessageWrapper } from "./style";
+import {
+  StyledMessageWrapper,
+  StyledEmojiPickerWrapper,
+  StyledEmojiIcon,
+} from "./style";
 
 interface Props {
   socket: {
@@ -19,15 +27,22 @@ interface Props {
 const NewMessageForm = ({ socket }: Props) => {
   const { user } = useContext(Context);
   const [message, setMessage] = useState<string>("");
+  const [emojiPicker, setEmojiPicker] = useState<boolean>(false);
 
   const sendMsg = (e: React.FormEvent) => {
     e.preventDefault();
     socket.emit("msg", { user, message });
     setMessage("");
+    setEmojiPicker(false);
   };
 
   const attachment = (e: React.FormEvent) => {
     e.preventDefault();
+  };
+
+  const addEmoji = (e: { native: any }) => {
+    const emoji = e.native;
+    setMessage(message + emoji);
   };
 
   return (
@@ -38,6 +53,13 @@ const NewMessageForm = ({ socket }: Props) => {
           placeholder="Enter your message here"
           value={message}
         />
+        <StyledEmojiIcon
+          onClick={() => {
+            setEmojiPicker(!emojiPicker);
+          }}
+        >
+          <img src={HappyIcon} />
+        </StyledEmojiIcon>
         <Button
           icon={<PaperPlaneIcon size={4} />}
           onClick={sendMsg}
@@ -50,6 +72,11 @@ const NewMessageForm = ({ socket }: Props) => {
           className="attach"
         />
       </Form>
+      {emojiPicker && (
+        <StyledEmojiPickerWrapper>
+          <Picker onSelect={addEmoji} />
+        </StyledEmojiPickerWrapper>
+      )}
     </StyledMessageWrapper>
   );
 };

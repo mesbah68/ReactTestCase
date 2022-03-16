@@ -51,6 +51,10 @@ export const StyledChatRoomHeader = Styled.div`
   border-radius: 0 15px 0 0;
   h5 {
       margin: 0;
+      padding-left: 15px;
+      span {
+          margin-right: 10px;
+      }
   }
   svg {
       margin: 0 10px;

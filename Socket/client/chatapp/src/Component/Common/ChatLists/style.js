@@ -33,6 +33,7 @@ export const StyledAvatarWrapper = Styled.div`
 export const StyledUserName = Styled.span`
     flex-grow: 1;
     justify-content: flex-start !important;
+    padding-left: 10px;
 `;
 
 export const StyledSearchWrapper = Styled.div`
@@ -47,5 +48,15 @@ export const StyledSearchWrapper = Styled.div`
       right: 8px;
       top: 6px;
       cursor: pointer;
+    }
+`;
+
+export const StyledSystemWrapper = Styled.div`
+    border-top: 1px solid #f3f3f3;
+    padding: 15px 0px;
+    margin-top: 10px;
+    h5 {
+      font-size: 13px;
+      color: #737373;
     }
 `;

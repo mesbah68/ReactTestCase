@@ -11,6 +11,10 @@ export const StyledUserItem = Styled.div`
   border-radius: 15px;
   margin-right: 10px;
   margin-bottom: 10px;
+  width: 100%;
+  > div {
+    width: 100%;
+  }
   span {
     margin-right: 10px;
   }
