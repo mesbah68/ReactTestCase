@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { Socket } from "socket.io-client";
 
 import {
   ArrowDown2TwoToneIcon,
   ArrowUp2TwoToneIcon,
   VolumeUpCurvedIcon,
-  Voice1CurvedIcon,
   // @ts-ignore
 } from "@iconbox/iconly";
 
 import User from "../../../User";
 import Group from "../../../Group";
+import { UserItems } from "../../../../../Constant/GlobalType";
 
 import {
   StyledVoiceChannelsWrapper,
@@ -18,19 +19,12 @@ import {
 } from "./style";
 
 interface Props {
-  socket: {
-    on: Function;
-  };
+  socket: Socket;
   count?: string;
 }
 
 const VoiceChannels = ({ socket, count }: Props) => {
-  const [users, setUsers] = useState<
-    Array<{
-      id: string;
-      name: string;
-    }>
-  >([]);
+  const [users, setUsers] = useState<UserItems[]>([]);
   const [toggleIcon, setToggleIcon] = useState(true);
 
   useEffect(() => {
@@ -54,13 +48,12 @@ const VoiceChannels = ({ socket, count }: Props) => {
           <ArrowDown2TwoToneIcon onClick={handleChangeIcon} />
         )}
       </StyledHeaderWrapper>
-      {toggleIcon
-        ? users.map((user: any, index: number) => (
-            <StyledUserItem key={index}>
-              <User user={user} icon={<VolumeUpCurvedIcon size={2} />} />
-            </StyledUserItem>
-          ))
-        : ""}
+      {toggleIcon &&
+        users.map((user: any, index: number) => (
+          <StyledUserItem key={index}>
+            <User user={user} icon={<VolumeUpCurvedIcon size={2} />} />
+          </StyledUserItem>
+        ))}
       {toggleIcon && (
         <>
           <Group title="Podchess" icon="🎤" detail="3/5" />

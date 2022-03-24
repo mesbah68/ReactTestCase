@@ -6,6 +6,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { EditSquareLightIcon, DeleteLightIcon } from "@iconbox/iconly";
 
 import Context from "../../../Context";
+import { MessageItems } from "../../../Constant/GlobalType";
 import { StyledAvatarWrapper } from "../User/style";
 
 import {
@@ -14,21 +15,14 @@ import {
   StyledIconsWrapper,
 } from "./style";
 
-interface MessageProp {
-  msg: {
-    user: {
-      id: string;
-      name?: string;
-    };
-    message: string;
-  };
+interface Prop {
+  message: MessageItems;
   key: number;
 }
 
-const Message = ({ msg, key }: MessageProp) => {
+const Message = ({ message, key }: Prop) => {
   const { user, setMessages, messages } = useContext(Context);
-  const isCurrentUser = user.id === msg.user.id;
-  console.log("***", messages[messages.length - 1]);
+  const isCurrentUser = user.id === message.user.id;
   // @ts-ignore
   // let filteredArray = msg.filter((item) => item !== item[key]);
   return (
@@ -41,7 +35,7 @@ const Message = ({ msg, key }: MessageProp) => {
       <StyledMessageText>
         <div className={`bg-${isCurrentUser ? "blue" : "white"}`}>
           {/* {isCurrentUser ? <span>{msg.user.name}</span> : null} */}
-          {msg.message}
+          {message.message}
         </div>
         <span className={isCurrentUser ? "currentUser" : ""}>8h ago</span>
       </StyledMessageText>

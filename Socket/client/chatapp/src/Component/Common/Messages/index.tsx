@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { Socket } from "socket.io-client";
 
 import Message from "../Message";
 import Context from "../../../Context";
@@ -6,19 +7,21 @@ import Context from "../../../Context";
 import { StyledMessagesWrapper, StyledMessageItem } from "./style";
 
 interface Props {
-  socket: {
-    on: any;
-    emit: any;
-  };
+  socket: Socket;
 }
 
 const Messages = ({ socket }: Props) => {
   const { messages, setMessages } = useContext(Context);
 
   useEffect(() => {
-    socket.on("msg", (message: string) => {
+    const listener = (message: string) => {
       setMessages(message);
-    });
+    };
+    socket.on("msg", listener);
+
+    return () => {
+      socket.off("msg", listener);
+    };
   }, [socket]);
 
   return (
@@ -26,7 +29,7 @@ const Messages = ({ socket }: Props) => {
       {messages &&
         messages.map((message: any, index: number) => (
           <StyledMessageItem>
-            <Message key={index} msg={message} />
+            <Message key={index} message={message} />
           </StyledMessageItem>
         ))}
     </StyledMessagesWrapper>

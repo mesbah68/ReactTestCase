@@ -6,7 +6,7 @@ import ChatWrapper from "./Component/Pages/Chat/ChatWrapper";
 import "antd/dist/antd.css";
 
 function App() {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState({});
   const [messages, setMessages] = useState([]);
 
   const store = {

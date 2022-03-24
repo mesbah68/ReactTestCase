@@ -1,18 +1,16 @@
 import Styled from "styled-components";
 
-export const StyledChatFormWrapper = Styled.div`
-  
-`;
+export const StyledChatFormWrapper = Styled.div``;
 
 export const StyledGroupWrapper = Styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 40px;
-    .ant-badge-dot {
-        background : #29ae60;
-        top: 30px;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  .ant-badge-dot {
+      background : #29ae60;
+      top: 30px;
+  }
 `;
 export const StyledIcon = Styled.span`
   margin-right: 25px;

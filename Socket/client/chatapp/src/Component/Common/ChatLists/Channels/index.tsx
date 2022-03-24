@@ -1,4 +1,5 @@
 import React from "react";
+import { Socket } from "socket.io-client";
 
 import ChatChannels from "./ChatChannels";
 import VoiceChannels from "./VoiceChannels";
@@ -6,9 +7,7 @@ import VoiceChannels from "./VoiceChannels";
 import { StyledChannelsWrapper, StyledHeaderWrapper } from "./style";
 
 interface Props {
-  socket: {
-    on: Function;
-  };
+  socket: Socket;
   count: string;
 }
 

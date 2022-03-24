@@ -1,8 +1,6 @@
 import Styled from "styled-components";
 
-export const StyledVoiceChannelsWrapper = Styled.div`
-  
-`;
+export const StyledVoiceChannelsWrapper = Styled.div``;
 
 export const StyledUserItem = Styled.div`
   display: flex;

@@ -1,15 +1,9 @@
 // ignore eslint
 import React, { useContext, useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import Context from "../../../Context";
 
 import { Col, Row, Typography } from "antd";
-// @ts-ignore
-import {
-  ArrowDown2LightIcon,
-  ChatCurvedIcon,
-  // @ts-ignore
-} from "@iconbox/iconly";
 
 import EnterChatForm from "../../Common/EnterChatForm";
 import ChatLists from "../../Common/ChatLists";
@@ -28,21 +22,9 @@ interface Props {
   chatRoomTitle: string;
 }
 
-interface Socket {
-  connected: boolean;
-  io: Object;
-  on: Function;
-  emit: Function;
-}
-
 const ChatWrapper = ({ chatRoomTitle }: Props) => {
   const { user, setUser } = useContext(Context);
-  const [socket, setSocket] = useState<Socket>({
-    connected: false,
-    io: {},
-    emit: () => {},
-    on: () => {},
-  });
+  const [socket, setSocket] = useState<Socket>();
   const { Title } = Typography;
 
   useEffect(() => {
@@ -53,7 +35,7 @@ const ChatWrapper = ({ chatRoomTitle }: Props) => {
 
   return (
     <Row className="ant-row ant-row-center">
-      <Col span={12}>
+      <Col span={24}>
         <StyledChatWrapper>
           <StyledChatInner className="font-face-gb">
             {user && socket && socket.connected ? (

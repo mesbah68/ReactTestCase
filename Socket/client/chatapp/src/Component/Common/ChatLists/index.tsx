@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Typography, Avatar, Input } from "antd";
+import { Socket } from "socket.io-client";
 import { UserOutlined } from "@ant-design/icons";
 // @ts-ignore
 import { MenuIcon } from "@iconbox/jamicons";
@@ -7,6 +8,7 @@ import { MenuIcon } from "@iconbox/jamicons";
 import { SearchOutlineIcon } from "@iconbox/eva";
 
 import Context from "../../../Context";
+import { UserItems } from "../../../Constant/GlobalType";
 import Channels from "./Channels";
 import Group from "../Group";
 
@@ -19,27 +21,25 @@ import {
 } from "./style";
 
 interface Props {
-  socket: {
-    on: Function;
-  };
+  socket: Socket;
 }
 
 const ChatList = ({ socket }: Props) => {
-  const [users, setUsers] = useState<
-    Array<{
-      id: string;
-      name: string;
-    }>
-  >([]);
+  const [users, setUsers] = useState<UserItems[]>([]);
   const { user, setUser, setMessages, messages } = useContext(Context);
 
   const { Title } = Typography;
-  const channelsCount = "120";
+  const CHANNELSCOUNT = "120";
 
   useEffect(() => {
-    socket.on("users", (users: any) => {
+    const listener = (users: any) => {
       setUsers(users);
-    });
+    };
+    socket.on("users", listener);
+
+    return () => {
+      socket.off("users", listener);
+    };
   }, [socket]);
 
   const handleLogout = (e: React.FormEvent) => {
@@ -69,7 +69,7 @@ const ChatList = ({ socket }: Props) => {
         <Input placeholder="Search" />
         <SearchOutlineIcon size={3} onClick={() => {}} />
       </StyledSearchWrapper>
-      <Channels socket={socket} count={channelsCount} />
+      <Channels socket={socket} count={CHANNELSCOUNT} />
       <StyledSystemWrapper>
         <Title level={5}>SYSTEM</Title>
         <Group title="General Setting" icon="⚙️" />

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Form, Input, Button } from "antd";
+import { Socket } from "socket.io-client";
 // @ts-ignore
 import { PaperPlaneIcon } from "@iconbox/ion";
 // @ts-ignore
@@ -18,10 +19,7 @@ import {
 } from "./style";
 
 interface Props {
-  socket: {
-    on: any;
-    emit: any;
-  };
+  socket: Socket;
 }
 
 const NewMessageForm = ({ socket }: Props) => {

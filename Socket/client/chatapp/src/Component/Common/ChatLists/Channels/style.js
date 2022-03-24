@@ -1,8 +1,6 @@
 import Styled from "styled-components";
 
-export const StyledChannelsWrapper = Styled.div`
-  
-`;
+export const StyledChannelsWrapper = Styled.div``;
 
 export const StyledHeaderWrapper = Styled.div`
   display: flex;
