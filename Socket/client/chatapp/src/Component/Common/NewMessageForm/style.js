@@ -50,7 +50,7 @@ export const StyledMessageWrapper = Styled.div`
 export const StyledEmojiPickerWrapper = Styled.div`
     display: flex;
     position: absolute;
-    left: -65%;
+    left: -87%;
     bottom: 0;
 `;
 export const StyledEmojiIcon = Styled.span`

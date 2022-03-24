@@ -3,7 +3,6 @@ import Context from "./Context";
 
 import ChatWrapper from "./Component/Pages/Chat/ChatWrapper";
 
-import "./App.css";
 import "antd/dist/antd.css";
 
 function App() {
