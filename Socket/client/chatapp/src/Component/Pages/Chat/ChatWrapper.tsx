@@ -1,7 +1,9 @@
 // ignore eslint
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { UserSelectors, useUserActions } from "../../../@redux";
+
 import { io, Socket } from "socket.io-client";
-import Context from "../../../Context";
 
 import { Col, Row, Typography } from "antd";
 
@@ -23,15 +25,19 @@ interface Props {
 }
 
 const ChatWrapper = ({ chatRoomTitle }: Props) => {
-  const { user, setUser } = useContext(Context);
   const [socket, setSocket] = useState<Socket>();
   const { Title } = Typography;
+
+  const user = useSelector(UserSelectors.getUser);
+  const { setUser } = useUserActions();
 
   useEffect(() => {
     const newSocket = io("http://localhost:4000");
     setSocket(newSocket);
-    setUser(null);
+    // setUser(null);
   }, []);
+
+  console.log(user.id);
 
   return (
     <Row className="ant-row ant-row-center">
@@ -59,7 +65,7 @@ const ChatWrapper = ({ chatRoomTitle }: Props) => {
                 </Col>
               </Row>
             ) : null}
-            {!user && socket ? (
+            {!!user.length && socket && !socket.connected ? (
               <div>
                 <EnterChatForm socket={socket} />
               </div>

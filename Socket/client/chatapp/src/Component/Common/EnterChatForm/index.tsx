@@ -5,13 +5,14 @@ import { Socket } from "socket.io-client";
 import Context from "../../../Context";
 
 import { StyledChatFormWrapper } from "./style";
+import { useUserActions } from "../../../@redux";
 
 interface Props {
   socket: Socket;
 }
 
 const EnterChatForm = ({ socket }: Props) => {
-  const { setUser } = useContext(Context);
+  const { setUser } = useUserActions();
   const [localUsername, setLocalUsername] = useState<string>("");
 
   useEffect(() => {

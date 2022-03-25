@@ -1,0 +1,40 @@
+import { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import types from "./types";
+
+/**
+ * Main action dispatcher
+ */
+export default function useHook() {
+  const dispatch = useDispatch();
+
+  /**
+   * Send a message to active chat
+   */
+  const setMessages = useCallback(
+    (message) => dispatch({ type: types.SET_MESSAGES, payload: message }),
+    [dispatch]
+  );
+
+  /**
+   * Remove a message from messages list
+   */
+  const removeMessage = useCallback(
+    (id) => dispatch({ type: types.REMOVE_MESSAGE, payload: id }),
+    [dispatch]
+  );
+
+  /**
+   * Clear all messages
+   */
+  const clearAllMessages = useCallback(
+    () => dispatch({ type: types.CLEAR_ALL_MESSAGES }),
+    [dispatch]
+  );
+
+  return {
+    setMessages,
+    removeMessage,
+    clearAllMessages,
+  };
+}

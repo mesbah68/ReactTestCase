@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Button, Typography, Avatar, Input } from "antd";
 import { Socket } from "socket.io-client";
 import { UserOutlined } from "@ant-design/icons";
@@ -6,6 +7,12 @@ import { UserOutlined } from "@ant-design/icons";
 import { MenuIcon } from "@iconbox/jamicons";
 // @ts-ignore
 import { SearchOutlineIcon } from "@iconbox/eva";
+
+import {
+  useMessageActions,
+  UserSelectors,
+  useUserActions,
+} from "../../../@redux";
 
 import Context from "../../../Context";
 import { UserItems } from "../../../Constant/GlobalType";
@@ -25,15 +32,19 @@ interface Props {
 }
 
 const ChatList = ({ socket }: Props) => {
-  const [users, setUsers] = useState<UserItems[]>([]);
-  const { user, setUser, setMessages, messages } = useContext(Context);
+  // const [users, setUsers] = useState<UserItems[]>([]);
+  // const { user, setUser, setMessages } = useContext(Context);
+
+  const user = useSelector(UserSelectors.getUser);
+  const { setUser } = useUserActions();
+  const { setMessages } = useMessageActions();
 
   const { Title } = Typography;
   const CHANNELSCOUNT = "120";
 
   useEffect(() => {
-    const listener = (users: any) => {
-      setUsers(users);
+    const listener = (user: any) => {
+      setUser(user);
     };
     socket.on("users", listener);
 
@@ -44,8 +55,8 @@ const ChatList = ({ socket }: Props) => {
 
   const handleLogout = (e: React.FormEvent) => {
     e.preventDefault();
-    setUser(null);
-    setMessages(null);
+    setUser({});
+    setMessages([]);
   };
 
   return (
@@ -58,7 +69,7 @@ const ChatList = ({ socket }: Props) => {
               icon={<UserOutlined />}
               size="large"
             />
-            <StyledUserName>{user.name}</StyledUserName>
+            {/* <StyledUserName>{user.name}</StyledUserName> */}
             <MenuIcon size={2.5} />
           </StyledAvatarWrapper>
         ) : (

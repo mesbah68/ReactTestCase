@@ -5,13 +5,16 @@ import Message from "../Message";
 import Context from "../../../Context";
 
 import { StyledMessagesWrapper, StyledMessageItem } from "./style";
+import { useSelector } from "react-redux";
+import { MessageSelectors, useMessageActions } from "../../../@redux";
 
 interface Props {
   socket: Socket;
 }
 
 const Messages = ({ socket }: Props) => {
-  const { messages, setMessages } = useContext(Context);
+  const messages = useSelector(MessageSelectors.getMessagesList);
+  const { setMessages } = useMessageActions();
 
   useEffect(() => {
     const listener = (message: string) => {
@@ -23,6 +26,8 @@ const Messages = ({ socket }: Props) => {
       socket.off("msg", listener);
     };
   }, [socket]);
+
+  console.log("messages===>", messages);
 
   return (
     <StyledMessagesWrapper>
