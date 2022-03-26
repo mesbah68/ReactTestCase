@@ -34,17 +34,14 @@ const ChatWrapper = ({ chatRoomTitle }: Props) => {
   useEffect(() => {
     const newSocket = io("http://localhost:4000");
     setSocket(newSocket);
-    // setUser(null);
   }, []);
-
-  console.log(user.id);
 
   return (
     <Row className="ant-row ant-row-center">
       <Col span={24}>
         <StyledChatWrapper>
           <StyledChatInner className="font-face-gb">
-            {user && socket && socket.connected ? (
+            {user && socket && socket?.connected ? (
               <Row>
                 <Col span={8}>
                   <ChatLists socket={socket} />
@@ -64,12 +61,14 @@ const ChatWrapper = ({ chatRoomTitle }: Props) => {
                   <NewMessageForm socket={socket} />
                 </Col>
               </Row>
-            ) : null}
-            {!!user.length && socket && !socket.connected ? (
-              <div>
-                <EnterChatForm socket={socket} />
-              </div>
-            ) : null}
+            ) : (
+              socket &&
+              !socket?.connected && (
+                <div>
+                  <EnterChatForm socket={socket} />
+                </div>
+              )
+            )}
           </StyledChatInner>
         </StyledChatWrapper>
       </Col>

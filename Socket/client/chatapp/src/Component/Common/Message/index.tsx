@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
+import { useSelector } from "react-redux";
 import { Avatar, Badge } from "antd";
 
 import { UserOutlined } from "@ant-design/icons";
 // @ts-ignore
 import { EditSquareLightIcon, DeleteLightIcon } from "@iconbox/iconly";
 
-import Context from "../../../Context";
+import { UserSelectors, useUserActions } from "../../../@redux";
+
 import { MessageItems } from "../../../Constant/GlobalType";
 import { StyledAvatarWrapper } from "../User/style";
 
@@ -21,7 +23,8 @@ interface Prop {
 }
 
 const Message = ({ message, key }: Prop) => {
-  const { user, setMessages, messages } = useContext(Context);
+  const user = useSelector(UserSelectors.getUser);
+
   const isCurrentUser = user.id === message.user.id;
   // @ts-ignore
   // let filteredArray = msg.filter((item) => item !== item[key]);
@@ -42,9 +45,9 @@ const Message = ({ message, key }: Prop) => {
       {isCurrentUser && (
         <StyledIconsWrapper>
           <DeleteLightIcon
-            onClick={() => {
-              setMessages(null);
-            }}
+            // onClick={() => {
+            //   setMessages(null);
+            // }}
             size={2}
           />
           <EditSquareLightIcon size={2} />

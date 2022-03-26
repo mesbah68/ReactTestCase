@@ -19,9 +19,10 @@ export default function () {
   /**
    * Log user out
    */
-  const logout = useCallback(() => dispatch({ type: types.LOGOUT }), [
-    dispatch,
-  ]);
+  const logout = useCallback(
+    () => dispatch({ type: types.LOGOUT }), 
+  [dispatch]
+  );
 
   return {
     setUser,

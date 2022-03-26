@@ -1,11 +1,8 @@
 import { createSelector } from "reselect";
 
 // memoized intent
-const getUser = (state) => state.user;
+const getContacts = (state) => state.contacts;
 
 export default {
-  getContacts: createSelector(getUser, (user) => user.contacts),
-  getUser: createSelector(getUser, (user) => (id) => {
-    return user.contacts.filter((usr) => usr.id === id);
-  }),
+  getContacts: createSelector(getContacts, (contacts) => contacts.contacts),
 };

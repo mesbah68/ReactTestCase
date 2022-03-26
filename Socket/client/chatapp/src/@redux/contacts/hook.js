@@ -24,8 +24,17 @@ export default function () {
     [dispatch]
   );
 
+  /**
+   * Update a contact
+   */
+  const updateContact = useCallback(
+    (payload) => dispatch({ type: types.UPDATE_CONTACT, payload }),
+    [dispatch]
+  );
+
   return {
     addContact,
     deleteContact,
+    updateContact,
   };
 }

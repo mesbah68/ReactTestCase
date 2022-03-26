@@ -1,12 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Socket } from "socket.io-client";
 
 import Message from "../Message";
-import Context from "../../../Context";
 
 import { StyledMessagesWrapper, StyledMessageItem } from "./style";
-import { useSelector } from "react-redux";
-import { MessageSelectors, useMessageActions } from "../../../@redux";
+import {
+  MessageSelectors,
+  useMessageActions,
+  UserSelectors,
+} from "../../../@redux";
 
 interface Props {
   socket: Socket;
@@ -15,9 +18,10 @@ interface Props {
 const Messages = ({ socket }: Props) => {
   const messages = useSelector(MessageSelectors.getMessagesList);
   const { setMessages } = useMessageActions();
+  const user = useSelector(UserSelectors.getUser);
 
   useEffect(() => {
-    const listener = (message: string) => {
+    const listener = (message: any) => {
       setMessages(message);
     };
     socket.on("msg", listener);
@@ -26,8 +30,6 @@ const Messages = ({ socket }: Props) => {
       socket.off("msg", listener);
     };
   }, [socket]);
-
-  console.log("messages===>", messages);
 
   return (
     <StyledMessagesWrapper>

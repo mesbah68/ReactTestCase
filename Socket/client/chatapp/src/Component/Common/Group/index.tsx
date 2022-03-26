@@ -18,8 +18,6 @@ interface Props {
 }
 
 const Group = ({ title, icon, detail, onClick, className }: Props) => {
-  console.log(className);
-
   return (
     <StyledGroupWrapper onClick={onClick}>
       <StyledIcon className={className}>{icon}</StyledIcon>

@@ -28,6 +28,8 @@ export const StyledChatListWrapper = Styled.div`
 export const StyledAvatarWrapper = Styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
 `;
 
 export const StyledUserName = Styled.span`
@@ -58,5 +60,75 @@ export const StyledSystemWrapper = Styled.div`
   h5 {
     font-size: 13px;
     color: #737373;
+  }
+`;
+
+export const StyledAddContactWrapper = Styled.div`
+  display: flex;
+  padding: 50px 10px;
+  flex-direction: column;
+  button {
+    margin-top: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      color: #fff;
+      padding-bottom: 5px;
+    }
+  }
+  input {
+    height: 45px;
+    border-radius: 5px;
+  }
+  span {
+    padding-bottom: 5px;
+    color: #424242;
+  }
+`;
+
+export const StyledMoreOptionWrapper = Styled.div`
+  position: absolute;
+  right: 20px;
+  top: 35px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ebebeb;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 99;
+  cursor: pointer;
+  width: 150px;
+  color: #606060;
+  span {
+    padding-bottom: 5px;
+  }
+`;
+
+export const StyledContactListWrapper = Styled.div`
+  padding-top: 20px;
+`;
+
+export const StyledModalWrapper = Styled.div`
+  .ant-modal-content {
+    .ant-btn {
+      border-radius: 14px;
+    }
+  }
+`;
+
+export const StyledUsername = Styled.span`
+  flex-grow: 1;
+  cursor: pointer;
+  margin-left: 10px;
+`;
+
+export const StyledIconWrapper = Styled.div`
+  cursor: pointer;
+  svg {
+    margin: 5px;
   }
 `;

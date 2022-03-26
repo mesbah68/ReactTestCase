@@ -2,7 +2,6 @@ import { uuid } from "react-uuid";
 import types from "./types";
 
 export const initialValues = {
-  activeChat: 0,
   messagesList: [],
 };
 
