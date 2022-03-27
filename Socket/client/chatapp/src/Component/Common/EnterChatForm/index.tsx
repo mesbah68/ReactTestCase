@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Input, Button } from "antd";
 import { Socket } from "socket.io-client";
 // import { LoginIcon } from '@iconbox/tabler';
@@ -28,8 +28,6 @@ const EnterChatForm = ({ socket }: Props) => {
 
   const handleEnterChatroom = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(socket);
-    console.log(localUsername);
     socket.emit("user", localUsername);
     setLocalUsername("");
   };

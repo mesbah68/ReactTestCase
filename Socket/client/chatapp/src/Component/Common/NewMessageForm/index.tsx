@@ -1,6 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Form, Input, Button } from "antd";
 import { Socket } from "socket.io-client";
+// @ts-ignore
+import uuid from "react-uuid";
 // @ts-ignore
 import { PaperPlaneIcon } from "@iconbox/ion";
 // @ts-ignore
@@ -10,26 +12,29 @@ import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
 import HappyIcon from "../../../assets/images/happy.png";
 
-import Context from "../../../Context";
+import { UserSelectors } from "../../../@redux";
 
 import {
   StyledMessageWrapper,
   StyledEmojiPickerWrapper,
   StyledEmojiIcon,
 } from "./style";
+import {useSelector} from "react-redux";
 
 interface Props {
   socket: Socket;
 }
 
 const NewMessageForm = ({ socket }: Props) => {
-  const { user } = useContext(Context);
+  const user = useSelector(UserSelectors.getUser);
   const [message, setMessage] = useState<string>("");
   const [emojiPicker, setEmojiPicker] = useState<boolean>(false);
 
   const sendMsg = (e: React.FormEvent) => {
     e.preventDefault();
-    socket.emit("msg", { user, message });
+    const id = uuid();
+    const messages = { text: message, id : id};
+    socket.emit("msg", { user, messages });
     setMessage("");
     setEmojiPicker(false);
   };

@@ -9,7 +9,7 @@ import { Col, Row, Typography } from "antd";
 
 import EnterChatForm from "../../Common/EnterChatForm";
 import ChatLists from "../../Common/ChatLists";
-import NewMessageForm from "../../Common/NewMessageForm";
+import ContactsList from "../../Common/ContactsList";
 import Messages from "../../Common/Messages";
 
 import {
@@ -29,7 +29,6 @@ const ChatWrapper = ({ chatRoomTitle }: Props) => {
   const { Title } = Typography;
 
   const user = useSelector(UserSelectors.getUser);
-  const { setUser } = useUserActions();
 
   useEffect(() => {
     const newSocket = io("http://localhost:4000");
@@ -41,7 +40,7 @@ const ChatWrapper = ({ chatRoomTitle }: Props) => {
       <Col span={24}>
         <StyledChatWrapper>
           <StyledChatInner className="font-face-gb">
-            {user && socket && socket?.connected ? (
+            {user.length!==0 && socket ? (
               <Row>
                 <Col span={8}>
                   <ChatLists socket={socket} />
@@ -55,15 +54,21 @@ const ChatWrapper = ({ chatRoomTitle }: Props) => {
                       </Title>
                     </StyledChatRoomHeader>
                     <StyledMessageContent>
-                      <Messages socket={socket} />
+                      <Row>
+                        <Col span={16}>
+                          <Messages socket={socket} />
+                        </Col>
+                        <Col span={8}>
+                          <ContactsList socket={socket} />
+                        </Col>
+                      </Row>
                     </StyledMessageContent>
                   </StyledMessageWrapper>
-                  <NewMessageForm socket={socket} />
                 </Col>
               </Row>
             ) : (
               socket &&
-              !socket?.connected && (
+              user?.length === 0 && (
                 <div>
                   <EnterChatForm socket={socket} />
                 </div>

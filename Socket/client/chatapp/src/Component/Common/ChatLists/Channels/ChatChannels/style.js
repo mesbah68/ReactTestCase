@@ -27,4 +27,5 @@ export const StyledHeaderWrapper = Styled.div`
   padding: 20px 0 10px;
   color: #858585;
   font-weight: bold;
+  cursor: pointer;
 `;

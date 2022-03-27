@@ -40,7 +40,7 @@ const VoiceChannels = ({ socket, count }: Props) => {
 
   return (
     <StyledVoiceChannelsWrapper>
-      <StyledHeaderWrapper>
+      <StyledHeaderWrapper onClick={handleChangeIcon}>
         <span>VOICE CHANNELS</span>
         {toggleIcon ? (
           <ArrowUp2TwoToneIcon onClick={handleChangeIcon} />

@@ -3,8 +3,9 @@ import { useSelector } from "react-redux";
 import { Socket } from "socket.io-client";
 
 import Message from "../Message";
+import NewMessageForm from "../NewMessageForm";
 
-import { StyledMessagesWrapper, StyledMessageItem } from "./style";
+import { StyledMessagesWrapper, StyledMessageItem, StyledMessageContent } from "./style";
 import {
   MessageSelectors,
   useMessageActions,
@@ -30,15 +31,17 @@ const Messages = ({ socket }: Props) => {
       socket.off("msg", listener);
     };
   }, [socket]);
-
   return (
     <StyledMessagesWrapper>
-      {messages &&
-        messages.map((message: any, index: number) => (
-          <StyledMessageItem>
-            <Message key={index} message={message} />
-          </StyledMessageItem>
+      <StyledMessageContent>
+        {messages &&
+        messages?.map((message: any, index: number) => (
+            <StyledMessageItem>
+              <Message key={index} message={message} />
+            </StyledMessageItem>
         ))}
+      </StyledMessageContent>
+      <NewMessageForm socket={socket} />
     </StyledMessagesWrapper>
   );
 };

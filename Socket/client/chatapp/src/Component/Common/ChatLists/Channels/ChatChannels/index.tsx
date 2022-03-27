@@ -41,7 +41,7 @@ const ChatChannels = ({ socket, count }: Props) => {
 
   return (
     <StyledChatChannelsWrapper>
-      <StyledHeaderWrapper>
+      <StyledHeaderWrapper onClick={handleChangeIcon}>
         <span>CHAT CHANNELS</span>
         {toggleIcon ? (
           <ArrowUp2TwoToneIcon onClick={handleChangeIcon} />

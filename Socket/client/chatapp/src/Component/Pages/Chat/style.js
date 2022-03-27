@@ -33,11 +33,6 @@ export const StyledMessageContent = Styled.div`
   position: relative;
   height: 100%;
   background-color: #fafcff;
-  overflow: auto;
-  scrollbar-width: none; 
-  ::-webkit-scrollbar {
-    display: none;
-  }
 `;
 export const StyledChatRoomHeader = Styled.div`
   display: flex;
@@ -47,7 +42,7 @@ export const StyledChatRoomHeader = Styled.div`
   padding: 20px 10px;
   margin-left: 1px;
   margin-bottom: 2px;
-  border-radius: 0 15px 0 0;
+  border-radius: 0;
   h5 {
     margin: 0;
     padding-left: 15px;

@@ -3,10 +3,7 @@ import Styled from "styled-components";
 export const StyledMessageWrapper = Styled.div`
   display: flex;
   align-items: center;
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  right: 20px;
+  padding: 10px;
   form {
     display: flex;
     flex-direction: row;
