@@ -38,8 +38,9 @@ export const StyledChatRoomHeader = Styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   background-color: #fff;
-  padding: 20px 10px;
+  padding: 15px 10px;
   margin-left: 1px;
   margin-bottom: 2px;
   border-radius: 0;
@@ -53,4 +54,33 @@ export const StyledChatRoomHeader = Styled.div`
   svg {
     margin: 0 10px;
   }
+`;
+
+export const StyledProfileWrapper = Styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+        cursor: pointer;
+        margin: 0 15px;
+    }
+    span {
+        &.username {
+            margin-right: 10px;
+        }
+    }
+`;
+
+export const StyledShowMoreWrapper = Styled.div`
+    position: absolute;
+    right: 20px;
+    top: 65px;
+    background-color: #eee;
+    border-radius: 2px;
+    z-index: 99;
+    width: 130px;
+    padding: 10px;
+    span {
+        cursor: pointer;
+    }
 `;

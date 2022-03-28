@@ -1,11 +1,10 @@
 import Styled from "styled-components";
 
 export const StyledContactListWrapper = Styled.div`
-  height: 100%;
   padding: 10px 20px 50px;
   background-color: #fff;
   position: relative;
-  height: 45.8rem;
+  height: 45rem;
   overflow: auto;
   scrollbar-width: none; 
   ::-webkit-scrollbar {

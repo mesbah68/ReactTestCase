@@ -1,12 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Avatar, Badge } from "antd";
+import { Socket } from "socket.io-client";
 
 import { UserOutlined } from "@ant-design/icons";
 // @ts-ignore
 import { EditSquareLightIcon, DeleteLightIcon } from "@iconbox/iconly";
 
-import { UserSelectors, useMessageActions } from "../../../@redux";
+import { UserSelectors, useMessageActions, MessageSelectors } from "../../../@redux";
 
 import { MessageItems } from "../../../Constant/GlobalType";
 import { StyledAvatarWrapper } from "../User/style";
@@ -18,15 +19,25 @@ import {
 } from "./style";
 
 interface Prop {
-  message: MessageItems;
+  messageItems: MessageItems;
+  socket: Socket,
   key: number;
 }
 
-const Message = ({ message, key }: Prop) => {
-  const user = useSelector(UserSelectors.getUser);
-    const { removeMessage, setMessages } = useMessageActions();
-    // @ts-ignore
-  const isCurrentUser = user[0]?.id === message.user[0]?.id;
+const Message = ({ messageItems, key, socket }: Prop) => {
+  // const user = useSelector(UserSelectors.getUser);
+  // const messages = useSelector(MessageSelectors.getMessagesList);
+  const { removeMessage } = useMessageActions();
+  // @ts-ignore
+  const isCurrentUser = true;
+  // const isCurrentUser = user[0]?.id === message?.user[0]?.id;
+
+  const handleRemoveMessage = (e: React.FormEvent) => {
+    e.preventDefault();
+    socket.emit("deleteMessage", messageItems.messages.id );
+    removeMessage(messageItems?.messages?.id);
+  }
+
     return (
     <StyledMessageItem className={isCurrentUser && "currentUser"}>
       <StyledAvatarWrapper>
@@ -36,19 +47,17 @@ const Message = ({ message, key }: Prop) => {
       </StyledAvatarWrapper>
       <StyledMessageText>
         <div className={`bg-${isCurrentUser ? "blue" : "white"}`}>
-          {message?.messages?.text}
+          {messageItems?.messages?.text}
         </div>
         <span className={isCurrentUser ? "currentUser" : ""}>8h ago</span>
       </StyledMessageText>
       {isCurrentUser && (
         <StyledIconsWrapper>
           <DeleteLightIcon
-            onClick={() => {
-                removeMessage(message?.messages?.id);
-            }}
+            onClick={handleRemoveMessage}
             size={2}
           />
-          <EditSquareLightIcon size={2} />
+          <EditSquareLightIcon size={2}  />
         </StyledIconsWrapper>
       )}
     </StyledMessageItem>

@@ -25,21 +25,23 @@ const Messages = ({ socket }: Props) => {
     const listener = (message: any) => {
       setMessages(message);
     };
-    socket.on("msg", listener);
+    socket.on("sendMessage", listener);
 
     return () => {
-      socket.off("msg", listener);
+      socket.off("sendMessage", listener);
     };
   }, [socket]);
+
+
   return (
     <StyledMessagesWrapper>
       <StyledMessageContent>
-        {messages &&
+        {messages.length ?
         messages?.map((message: any, index: number) => (
             <StyledMessageItem>
-              <Message key={index} message={message} />
+              <Message key={index} messageItems={message} socket={socket} />
             </StyledMessageItem>
-        ))}
+        )) : null }
       </StyledMessageContent>
       <NewMessageForm socket={socket} />
     </StyledMessagesWrapper>

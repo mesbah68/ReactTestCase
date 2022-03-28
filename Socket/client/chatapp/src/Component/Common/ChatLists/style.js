@@ -29,7 +29,13 @@ export const StyledAvatarWrapper = Styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 20px;
+  span {
+    background-color: #c1d8fa;
+    padding: 10px;
+  }
+  img {
+    width: 130px;
+  }
 `;
 
 export const StyledUserName = Styled.span`
@@ -127,8 +133,9 @@ export const StyledUsername = Styled.span`
 `;
 
 export const StyledIconWrapper = Styled.div`
-  cursor: pointer;
-  svg {
-    margin: 5px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
+
+

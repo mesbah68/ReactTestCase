@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Typography } from "antd";
 import { Socket } from "socket.io-client";
-// import { LoginIcon } from '@iconbox/tabler';
-import Context from "../../../Context";
 
 import { StyledChatFormWrapper } from "./style";
 import { useUserActions } from "../../../@redux";
+
+import loginChatLogo from "../../../assets/images/chatLogo.png";
 
 interface Props {
   socket: Socket;
@@ -13,36 +13,39 @@ interface Props {
 
 const EnterChatForm = ({ socket }: Props) => {
   const { setUser } = useUserActions();
+  const { Title } = Typography;
   const [localUsername, setLocalUsername] = useState<string>("");
 
   useEffect(() => {
     const listener = (user: string) => {
       setUser(user);
     };
-    socket.on("user", listener);
+    socket.on("addUser", listener);
 
     return () => {
-      socket.off("user", listener);
+      socket.off("addUser", listener);
     };
   }, [socket]);
 
   const handleEnterChatroom = (e: React.FormEvent) => {
     e.preventDefault();
-    socket.emit("user", localUsername);
+    socket.emit("addUser", localUsername);
     setLocalUsername("");
   };
 
   return (
     <StyledChatFormWrapper>
       <Form autoComplete="off" onFinish={handleEnterChatroom}>
+        <img src={loginChatLogo} />
+        <Title level={3}>Login</Title>
         <Input
           onChange={(e) => setLocalUsername(e.target.value)}
-          placeholder="Name"
+          placeholder="Username"
           value={localUsername}
         />
         <Button type="primary" htmlType="submit" onClick={handleEnterChatroom}>
           {/* <LoginIcon /> */}
-          Enter...
+          Enter
         </Button>
       </Form>
     </StyledChatFormWrapper>

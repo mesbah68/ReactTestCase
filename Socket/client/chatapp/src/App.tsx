@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Context from "./Context";
+import React from "react";
 
 import ChatWrapper from "./Component/Pages/Chat/ChatWrapper";
 

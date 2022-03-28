@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Button, Typography, Avatar, Input, Modal } from "antd";
+import { Button, Typography, Avatar, Input, Modal, Image } from "antd";
 import { Socket } from "socket.io-client";
 import { UserOutlined } from "@ant-design/icons";
 // @ts-ignore
@@ -9,6 +9,9 @@ import { DeleteLightIcon, EditSquareLightIcon } from "@iconbox/iconly";
 import { MenuIcon } from "@iconbox/jamicons";
 // @ts-ignore
 import { SearchOutlineIcon } from "@iconbox/eva";
+
+import  logo  from "./../../../assets/images/kLogo.png";
+import kumpulo from "../../../assets/images/kumpulo.png";
 
 import {
   useMessageActions,
@@ -24,7 +27,9 @@ import {
   StyledAvatarWrapper,
   StyledSearchWrapper,
   StyledSystemWrapper,
+  StyledIconWrapper,
 } from "./style";
+import HappyIcon from "../../../assets/images/happy.png";
 
 interface Props {
   socket: Socket;
@@ -60,15 +65,16 @@ const ChatList = ({ socket }: Props) => {
     <StyledChatListWrapper>
       <Title level={4}>
         {user ? (
-          <StyledAvatarWrapper>
-            <Avatar
-              src="https://joeschmoe.io/api/v1/random"
-              icon={<UserOutlined />}
-              size="large"
-            />
-            {/* <StyledUserName>{user.name}</StyledUserName> */}
-            <MenuIcon size={2.5} />
-          </StyledAvatarWrapper>
+            <StyledIconWrapper>
+              <StyledAvatarWrapper>
+                <Avatar
+                    src={logo}
+                    size="large"
+                />
+                <img src={kumpulo} />
+              </StyledAvatarWrapper>
+              <MenuIcon size={2.5} />
+            </StyledIconWrapper>
         ) : (
           "Chat"
         )}

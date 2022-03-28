@@ -12,7 +12,7 @@ import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
 import HappyIcon from "../../../assets/images/happy.png";
 
-import { UserSelectors } from "../../../@redux";
+import { MessageSelectors, UserSelectors, useMessageActions } from "../../../@redux";
 
 import {
   StyledMessageWrapper,
@@ -27,6 +27,8 @@ interface Props {
 
 const NewMessageForm = ({ socket }: Props) => {
   const user = useSelector(UserSelectors.getUser);
+  const messagesItem = useSelector(MessageSelectors.getMessagesList);
+  const { setMessages } = useMessageActions();
   const [message, setMessage] = useState<string>("");
   const [emojiPicker, setEmojiPicker] = useState<boolean>(false);
 
@@ -34,11 +36,10 @@ const NewMessageForm = ({ socket }: Props) => {
     e.preventDefault();
     const id = uuid();
     const messages = { text: message, id : id};
-    socket.emit("msg", { user, messages });
+    socket.emit("sendMessage", { user, messages });
     setMessage("");
     setEmojiPicker(false);
   };
-
   const attachment = (e: React.FormEvent) => {
     e.preventDefault();
   };

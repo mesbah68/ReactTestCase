@@ -1,11 +1,16 @@
 // ignore eslint
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { UserSelectors, useUserActions } from "../../../@redux";
+import { UserSelectors, useMessageActions } from "../../../@redux";
 
 import { io, Socket } from "socket.io-client";
 
-import { Col, Row, Typography } from "antd";
+import {Avatar, Col, Row, Typography} from "antd";
+// @ts-ignore
+import { ArrowDown2TwoToneIcon } from "@iconbox/iconly";
+// @ts-ignore
+import { NotificationLightIcon } from '@iconbox/iconly';
+
 
 import EnterChatForm from "../../Common/EnterChatForm";
 import ChatLists from "../../Common/ChatLists";
@@ -18,6 +23,8 @@ import {
   StyledMessageContent,
   StyledChatRoomHeader,
   StyledMessageWrapper,
+  StyledProfileWrapper,
+  StyledShowMoreWrapper,
 } from "./style";
 
 interface Props {
@@ -26,7 +33,9 @@ interface Props {
 
 const ChatWrapper = ({ chatRoomTitle }: Props) => {
   const [socket, setSocket] = useState<Socket>();
-  const { Title } = Typography;
+  const [showMore, setShowMore] = useState<boolean>(false);
+  const { clearAllMessages } = useMessageActions();
+  const { Title, Text } = Typography;
 
   const user = useSelector(UserSelectors.getUser);
 
@@ -34,6 +43,19 @@ const ChatWrapper = ({ chatRoomTitle }: Props) => {
     const newSocket = io("http://localhost:4000");
     setSocket(newSocket);
   }, []);
+
+  const handleShowMore = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowMore(!showMore);
+  }
+
+  const handleDeleteChat = (e: any) => {
+    e.preventDefault();
+    clearAllMessages();
+    // @ts-ignore
+    socket.emit("deleteChat");
+    setShowMore(false);
+  }
 
   return (
     <Row className="ant-row ant-row-center">
@@ -52,6 +74,20 @@ const ChatWrapper = ({ chatRoomTitle }: Props) => {
                         <span>💬 </span>
                         {chatRoomTitle}
                       </Title>
+                      <StyledProfileWrapper>
+                        <NotificationLightIcon />
+                        <Text className="username">{user[0]?.name}</Text>
+                        <Avatar
+                            src="https://joeschmoe.io/api/v1/random"
+                            size="large"
+                        />
+                        <ArrowDown2TwoToneIcon onClick={handleShowMore} />
+                        {showMore &&
+                        <StyledShowMoreWrapper>
+                          <Text onClick={handleDeleteChat}>Delete Chat</Text>
+                        </StyledShowMoreWrapper>
+                        }
+                      </StyledProfileWrapper>
                     </StyledChatRoomHeader>
                     <StyledMessageContent>
                       <Row>
