@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { useSelector } from "react-redux";
 import { Button, Typography, Avatar, Input, Modal, Form } from "antd";
 import { Socket } from "socket.io-client";
@@ -45,8 +45,11 @@ const ContactsList = ({  }: Props) => {
   const [updatedContactId, setUpdatedContactId] = useState("");
   const [searchedItem, setSearchedItem] = useState("");
 
-  const { Title, Text } = Typography;
-    const [form] = Form.useForm();
+  useEffect(() => {
+      setLocalContacts(contacts);
+  },[contacts])
+
+  const { Text } = Typography;
   const contactsList = localContacts.map(
     (item: { avatar: React.ReactNode; name: string; id: string }) => (
       <StyledAvatarWrapper>
@@ -80,7 +83,7 @@ const ContactsList = ({  }: Props) => {
   const handleAddContact = (e: React.FormEvent) => {
     e.preventDefault();
     const avatar = "https://joeschmoe.io/api/v1/random";
-    addContact({ name: contact, avatar })
+    addContact({ name: contact, avatar });
     setIsAddModalVisible(false);
   };
 
@@ -121,7 +124,6 @@ const ContactsList = ({  }: Props) => {
               visible={isAddModalVisible}
               onCancel={handleCancel}
               onOk={handleAddContact}
-              footer={null}
           >
             <StyledAddContactWrapper>
               <Text>Please enter your username</Text>
@@ -130,9 +132,6 @@ const ContactsList = ({  }: Props) => {
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
               />
-              <Button type="primary" htmlType="submit" onClick={handleAddContact}>
-                  Add
-              </Button>
             </StyledAddContactWrapper>
           </Modal>
           </StyledModalWrapper>
