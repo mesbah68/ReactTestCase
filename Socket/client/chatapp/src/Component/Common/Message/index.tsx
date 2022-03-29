@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import { useSelector } from "react-redux";
-import { Avatar, Badge } from "antd";
+import {Avatar, Badge, Button, Input, Modal, Typography} from "antd";
 import { Socket } from "socket.io-client";
 
 import { UserOutlined } from "@ant-design/icons";
@@ -16,6 +16,8 @@ import {
   StyledMessageItem,
   StyledMessageText,
   StyledIconsWrapper,
+  StyledModalWrapper,
+  StyledEditMessageWrapper,
 } from "./style";
 
 interface Prop {
@@ -25,9 +27,10 @@ interface Prop {
 }
 
 const Message = ({ messageItems, key, socket }: Prop) => {
-  // const user = useSelector(UserSelectors.getUser);
-  // const messages = useSelector(MessageSelectors.getMessagesList);
-  const { removeMessage } = useMessageActions();
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [textMessage, setTextMessage] = useState("");
+  const { removeMessage, editMessage } = useMessageActions();
+  const {Text} = Typography;
   // @ts-ignore
   const isCurrentUser = true;
   // const isCurrentUser = user[0]?.id === message?.user[0]?.id;
@@ -37,6 +40,21 @@ const Message = ({ messageItems, key, socket }: Prop) => {
     socket.emit("deleteMessage", messageItems.messages.id );
     removeMessage(messageItems?.messages?.id);
   }
+
+  const handleEditMessage = (e: React.FormEvent) => {
+    e.preventDefault();
+    socket.emit("editMessage", {id:messageItems.messages.id, text: textMessage });
+    editMessage({id:messageItems?.messages?.id, text:textMessage});
+    handleCancel();
+  }
+
+  const showEditModal = () => {
+    setIsEditModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsEditModalVisible(false);
+  };
 
     return (
     <StyledMessageItem className={isCurrentUser && "currentUser"}>
@@ -57,9 +75,30 @@ const Message = ({ messageItems, key, socket }: Prop) => {
             onClick={handleRemoveMessage}
             size={2}
           />
-          <EditSquareLightIcon size={2}  />
+          <EditSquareLightIcon size={2} onClick={showEditModal}  />
         </StyledIconsWrapper>
       )}
+      <StyledModalWrapper>
+        <Modal
+            title="Edit message"
+            visible={isEditModalVisible}
+            onCancel={handleCancel}
+            onOk={handleEditMessage}
+            footer={null}
+        >
+          <StyledEditMessageWrapper>
+            <Text>Enter your text message</Text>
+            <Input
+                placeholder="Username"
+                value={textMessage}
+                onChange={(e) => setTextMessage(e.target.value)}
+            />
+            <Button type="primary" htmlType="submit" onClick={handleEditMessage}>
+              Edit
+            </Button>
+          </StyledEditMessageWrapper>
+        </Modal>
+      </StyledModalWrapper>
     </StyledMessageItem>
   );
 };

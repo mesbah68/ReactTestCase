@@ -12,10 +12,19 @@ export default function (state = initialValues, { type, payload }) {
         ...state,
         messagesList: payload,
       };
+    case types.EDIT_MESSAGE:
+      const editedMessage = state.messagesList.find(
+          (item) => item?.messages?.id === payload.id
+      );
+      const editedMessageIndex = state.messagesList.indexOf(editedMessage);
+      state.messagesList[editedMessageIndex].messages.text = payload.text;
+      return {
+        ...state,
+      };
     case types.REMOVE_MESSAGE:
       return {
         ...state,
-        messagesList: state.messagesList.filter((msg) => msg?.messages?.id !== payload),
+        messagesList: state.messagesList.filter((item) => item?.messages?.id !== payload),
       };
     case types.CLEAR_ALL_MESSAGES:
       return initialValues;

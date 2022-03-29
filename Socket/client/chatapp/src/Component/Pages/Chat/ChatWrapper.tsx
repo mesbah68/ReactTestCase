@@ -25,6 +25,7 @@ import {
   StyledMessageWrapper,
   StyledProfileWrapper,
   StyledShowMoreWrapper,
+  StyledUserWrapper,
 } from "./style";
 
 interface Props {
@@ -76,12 +77,14 @@ const ChatWrapper = ({ chatRoomTitle }: Props) => {
                       </Title>
                       <StyledProfileWrapper>
                         <NotificationLightIcon />
-                        <Text className="username">{user[0]?.name}</Text>
-                        <Avatar
-                            src="https://joeschmoe.io/api/v1/random"
-                            size="large"
-                        />
-                        <ArrowDown2TwoToneIcon onClick={handleShowMore} />
+                        <StyledUserWrapper onClick={handleShowMore}>
+                          <Text className="username">{user[0]?.name}</Text>
+                          <Avatar
+                              src="https://joeschmoe.io/api/v1/random"
+                              size="large"
+                          >{user[0]?.name[0].toUpperCase()}</Avatar>
+                          <ArrowDown2TwoToneIcon />
+                        </StyledUserWrapper>
                         {showMore &&
                         <StyledShowMoreWrapper>
                           <Text onClick={handleDeleteChat}>Delete Chat</Text>

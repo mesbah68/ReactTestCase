@@ -47,7 +47,7 @@ const ContactsList = ({  }: Props) => {
   const contactsList = contacts.map(
     (item: { avatar: React.ReactNode; name: string; id: string }) => (
       <StyledAvatarWrapper>
-        <Avatar src={item.avatar} size="large" />
+          <Avatar src={item.avatar} size="large" >{item.name[0].toUpperCase()}</Avatar>
         <StyledUsername>{item.name}</StyledUsername>
         <StyledIconWrapper>
           <EditSquareLightIcon
@@ -61,7 +61,7 @@ const ContactsList = ({  }: Props) => {
               deleteContact(item.id);
             }}
           >
-            delete
+            Delete
           </DeleteLightIcon>
         </StyledIconWrapper>
       </StyledAvatarWrapper>

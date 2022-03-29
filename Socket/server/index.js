@@ -8,7 +8,7 @@ const io = new Server(4000, {
 });
 
 const users = new Map();
-const messages = [];
+let messages = [];
 io.on("connection", (socket) => {
   // When a new user enter chat
   socket.on("addUser", (user) => {
@@ -36,9 +36,18 @@ io.on("connection", (socket) => {
 
   // When a message has removed
   socket.on("deleteMessage", (messageId) => {
-    messages.filter(item => item.messages.id !== messageId);
-
+    messages = messages.filter(item => item.messages.id !== messageId);
     io.emit("deleteMessage", messages);
+  });
+
+  // When a message has edited
+  socket.on("editMessage", (msg) => {
+    const item = messages.find(
+        (item) => item?.messages?.id === msg.id
+    );
+    const editedMessageIndex = messages.indexOf(item);
+    messages[editedMessageIndex].messages.text = msg.text;
+    io.emit("editMessage", messages);
   });
 
   // When chat has deleted

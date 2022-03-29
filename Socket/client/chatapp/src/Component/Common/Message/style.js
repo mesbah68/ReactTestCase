@@ -51,3 +51,40 @@ export const StyledIconsWrapper = Styled.div`
     }
   }
 `;
+
+export const StyledModalWrapper = Styled.div`
+  .ant-modal-content {
+    .ant-btn {
+      border-radius: 14px;
+    }
+  }
+`;
+
+export const StyledEditMessageWrapper = Styled.div`
+  display: flex;
+  padding: 50px 10px;
+  flex-direction: column;
+  button {
+    margin-top: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 80px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      color: #fff;
+      padding-bottom: 5px;
+      padding-top: 5px;
+    }
+  }
+  input {
+    height: 45px;
+    border-radius: 5px;
+  }
+  span {
+    padding-bottom: 10px;
+    color: #424242;
+  }
+`;

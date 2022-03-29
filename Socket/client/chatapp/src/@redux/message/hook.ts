@@ -17,6 +17,14 @@ export default function useHook() {
   );
 
   /**
+   * Send a message to active chat
+   */
+  const editMessage = useCallback(
+      (message) => dispatch({ type: types.EDIT_MESSAGE, payload: message }),
+      [dispatch]
+  );
+
+  /**
    * Remove a message from messages list
    */
   const removeMessage = useCallback(
@@ -34,6 +42,7 @@ export default function useHook() {
 
   return {
     setMessages,
+    editMessage,
     removeMessage,
     clearAllMessages,
   };

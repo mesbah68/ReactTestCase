@@ -75,12 +75,20 @@ export const StyledShowMoreWrapper = Styled.div`
     position: absolute;
     right: 20px;
     top: 65px;
-    background-color: #eee;
-    border-radius: 2px;
+    background-color: #fff;
+    border-radius: 3px;
     z-index: 99;
     width: 130px;
     padding: 10px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
     span {
         cursor: pointer;
     }
+`;
+
+export const StyledUserWrapper = Styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 `;
