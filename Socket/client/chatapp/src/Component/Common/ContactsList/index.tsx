@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Button, Typography, Avatar, Input, Modal } from "antd";
+import { Button, Typography, Avatar, Input, Modal, Form } from "antd";
 import { Socket } from "socket.io-client";
 // @ts-ignore
 import { DeleteLightIcon, EditSquareLightIcon } from "@iconbox/iconly";
@@ -32,19 +32,22 @@ interface Props {
 }
 
 const ContactsList = ({  }: Props) => {
-  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
-  const [contact, setContact] = useState("");
-  const [username, setUsername] = useState("");
-  const [updatedContactId, setUpdatedContactId] = useState("");
-
   const contacts = useSelector(ContactsSelectors.getContacts);
   const { deleteContact } = useContactsActions();
   const { updateContact } = useContactsActions();
   const { addContact } = useContactsActions();
 
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
+  const [contact, setContact] = useState("");
+  const [localContacts, setLocalContacts] = useState<any>(contacts);
+  const [username, setUsername] = useState("");
+  const [updatedContactId, setUpdatedContactId] = useState("");
+  const [searchedItem, setSearchedItem] = useState("");
+
   const { Title, Text } = Typography;
-  const contactsList = contacts.map(
+    const [form] = Form.useForm();
+  const contactsList = localContacts.map(
     (item: { avatar: React.ReactNode; name: string; id: string }) => (
       <StyledAvatarWrapper>
           <Avatar src={item.avatar} size="large" >{item.name[0].toUpperCase()}</Avatar>
@@ -90,17 +93,28 @@ const ContactsList = ({  }: Props) => {
     setIsAddModalVisible(false);
   };
 
+  const handleSearchContact = (e: React.FormEvent) => {
+      e.preventDefault();
+      const filteredContacts = contacts.filter((item: { name: string; }) => item.name.toLowerCase() === searchedItem.toLowerCase());
+      setLocalContacts(filteredContacts);
+      if (!searchedItem) {
+          setLocalContacts(contacts);
+      }
+  }
+
   return (
       <StyledContactListWrapper>
         <StyledSearchWrapper>
-            <Input placeholder="Search" />
-            <SearchOutlineIcon size={3} onClick={() => {}} />
+            <form onSubmit={handleSearchContact} >
+                <Input placeholder="Search" value={searchedItem} onChange={(e) => setSearchedItem(e.target.value)} />
+                <SearchOutlineIcon size={3} onClick={handleSearchContact} />
+            </form>
         </StyledSearchWrapper>
         <StyledHeaderWrapper>
             <span>Contacts List</span>
             <span>{contacts.length}</span>
         </StyledHeaderWrapper>
-        <StyledContactListContent>{contactsList}</StyledContactListContent>
+        <StyledContactListContent>{contactsList.length ? contactsList : "No contacts found"}</StyledContactListContent>
         <StyledModalWrapper>
           <Modal
               title="Add Contact"
@@ -128,7 +142,6 @@ const ContactsList = ({  }: Props) => {
               visible={isEditModalVisible}
               onCancel={handleCancel}
               onOk={handleEditContact}
-              footer={null}
           >
             <StyledAddContactWrapper>
               <Text>Please enter your username</Text>
@@ -137,17 +150,10 @@ const ContactsList = ({  }: Props) => {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
               />
-              <Button
-                  type="primary"
-                  htmlType="submit"
-                  onClick={handleEditContact}
-              >
-                accept
-              </Button>
             </StyledAddContactWrapper>
           </Modal>
         </StyledModalWrapper>
-        <StyledAddContactButton onClick={() => setIsAddModalVisible((true))}>
+        <StyledAddContactButton onClick={() => setIsAddModalVisible(true)}>
           <span>+</span>
         </StyledAddContactButton>
       </StyledContactListWrapper>

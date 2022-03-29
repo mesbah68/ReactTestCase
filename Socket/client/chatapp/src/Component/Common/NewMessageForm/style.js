@@ -46,9 +46,9 @@ export const StyledMessageWrapper = Styled.div`
 `;
 export const StyledEmojiPickerWrapper = Styled.div`
   display: flex;
-  position: absolute;
-  left: -56%;
-  bottom: 0;
+  position: fixed;
+  left: 10px;
+  bottom: 12%;
 `;
 export const StyledEmojiIcon = Styled.span`
   position: absolute;

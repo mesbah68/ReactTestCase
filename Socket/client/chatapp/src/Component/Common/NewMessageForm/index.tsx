@@ -34,9 +34,11 @@ const NewMessageForm = ({ socket }: Props) => {
 
   const sendMsg = (e: React.FormEvent) => {
     e.preventDefault();
-    const id = uuid();
-    const messages = { text: message, id : id};
-    socket.emit("sendMessage", { user, messages });
+    if (message) {
+      const id = uuid();
+      const messages = { text: message, id : id};
+      socket.emit("sendMessage", { user, messages });
+    }
     setMessage("");
     setEmojiPicker(false);
   };
@@ -48,7 +50,6 @@ const NewMessageForm = ({ socket }: Props) => {
     const emoji = e.native;
     setMessage(message + emoji);
   };
-
   return (
     <StyledMessageWrapper>
       <Form autoComplete="off" onFinish={sendMsg}>

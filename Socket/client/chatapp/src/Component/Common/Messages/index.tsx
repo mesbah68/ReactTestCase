@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Socket } from "socket.io-client";
 
@@ -9,7 +9,6 @@ import { StyledMessagesWrapper, StyledMessageItem, StyledMessageContent } from "
 import {
   MessageSelectors,
   useMessageActions,
-  UserSelectors,
 } from "../../../@redux";
 
 interface Props {
@@ -19,7 +18,7 @@ interface Props {
 const Messages = ({ socket }: Props) => {
   const messages = useSelector(MessageSelectors.getMessagesList);
   const { setMessages } = useMessageActions();
-  const user = useSelector(UserSelectors.getUser);
+  const messageRef = useRef(null);
 
   useEffect(() => {
     const listener = (message: any) => {
@@ -32,10 +31,20 @@ const Messages = ({ socket }: Props) => {
     };
   }, [socket]);
 
+  useEffect(() => {
+    // messageRef.scrollTo({
+    //   // @ts-ignore
+    //   top: messageRef.current.offsetTop,
+    //   left: 0,
+    //   behavior: "smooth",
+    // });
+    console.log(messageRef);
+  },[messages])
+
 
   return (
     <StyledMessagesWrapper>
-      <StyledMessageContent>
+      <StyledMessageContent ref={messageRef}>
         {messages.length ?
         messages?.map((message: any, index: number) => (
             <StyledMessageItem>

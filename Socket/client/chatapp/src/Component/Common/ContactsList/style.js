@@ -1,11 +1,11 @@
 import Styled from "styled-components";
 
 export const StyledContactListWrapper = Styled.div`
-  padding: 10px 20px 50px;
+  padding: 10px 20px 100px;
   background-color: #fff;
   position: relative;
-  height: 45rem;
   overflow: auto;
+  height: 100vh;
   scrollbar-width: none; 
   ::-webkit-scrollbar {
     display: none;
@@ -51,7 +51,6 @@ export const StyledSearchWrapper = Styled.div`
 
 export const StyledAddContactWrapper = Styled.div`
   display: flex;
-  padding: 50px 10px;
   flex-direction: column;
   button {
     margin-top: 15px;
@@ -81,7 +80,13 @@ export const StyledContactListContent = Styled.div`
 `;
 
 export const StyledModalWrapper = Styled.div`
-  .ant-modal-content {
+  .ant-modal-body {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  .ant-modal-footer {
     .ant-btn {
       border-radius: 14px;
     }
@@ -119,8 +124,8 @@ export const StyledAddContactButton = Styled.div`
     align-items: center;
     justify-content: center;
     position: fixed;
-    bottom: 55px;
-    right: 60px ;
+    bottom: 10px;
+    right: 20px ;
     color: #fff;
     font-size: 30px;
     span {

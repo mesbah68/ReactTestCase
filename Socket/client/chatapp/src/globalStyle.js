@@ -4,6 +4,7 @@ import Fonts from "./assets/fonts/gilroy/Gilroy-Medium.ttf";
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
+    background-color: #f1f4ff;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
       "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
       sans-serif;
@@ -29,6 +30,11 @@ const GlobalStyle = createGlobalStyle`
     color: #fff;
     float: right;
     border-radius: 10px 10px 0 10px;
+  }
+  .sidebar {
+    .ant-drawer-body {
+        padding: 0;
+    }
   }
 `;
 

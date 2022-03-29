@@ -1,7 +1,7 @@
 import Styled from "styled-components";
 
 export const StyledChatListWrapper = Styled.div`
-  height: 100%;
+  height: 100vh;
   padding: 10px 20px;
   overflow: auto;
   scrollbar-width: none; 
@@ -16,7 +16,8 @@ export const StyledChatListWrapper = Styled.div`
     left: 0;
   }
   h4 {
-    margin: 0;
+    margin-top: 5px;
+    margin-bottom: 0;
     span {
       display: flex;
       align-items: center;
@@ -136,6 +137,7 @@ export const StyledIconWrapper = Styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 `;
 
 

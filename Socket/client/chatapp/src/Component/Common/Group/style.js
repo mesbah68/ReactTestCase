@@ -27,9 +27,16 @@ export const StyledIcon = Styled.span`
 `;
 export const StyledDetail = Styled.span`
   color: #949393;
+  cursor: pointer;  
+  &:hover {
+    color: #646464;
+  }
 `;
 export const StyledTitle = Styled.span`
   flex-grow: 1;
   color: #949393;
   cursor: pointer;  
+  &:hover {
+    color: #646464;
+  }
 `;

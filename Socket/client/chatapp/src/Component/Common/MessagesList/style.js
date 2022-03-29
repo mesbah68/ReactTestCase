@@ -7,9 +7,6 @@ export const StyledChatWrapper = Styled.div`
   background-color: #fff;
   border-radius: 10px;
   height: 100vh;
-  .sidebar {
-    padding: 0;
-  }
 `;
 
 export const StyledMessageWrapper = Styled.div`
@@ -23,7 +20,8 @@ export const StyledMessageContent = Styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  height: 100%;
+  height: 100vh;
+  overflow: hidden;
   background-color: #fafcff;
 `;
 export const StyledChatRoomHeader = Styled.div`
@@ -39,12 +37,14 @@ export const StyledChatRoomHeader = Styled.div`
   h5 {
     margin: 0;
     padding-left: 15px;
+    flex-grow: 1;
     span {
         margin-right: 10px;
     }
   }
   svg {
     margin: 0 10px;
+    cursor: pointer;
   }
 `;
 

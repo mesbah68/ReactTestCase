@@ -31,6 +31,7 @@ const Message = ({ messageItems, key, socket }: Prop) => {
   const [textMessage, setTextMessage] = useState("");
   const { removeMessage, editMessage } = useMessageActions();
   const {Text} = Typography;
+  const { TextArea } = Input;
   // @ts-ignore
   const isCurrentUser = true;
   // const isCurrentUser = user[0]?.id === message?.user[0]?.id;
@@ -84,18 +85,15 @@ const Message = ({ messageItems, key, socket }: Prop) => {
             visible={isEditModalVisible}
             onCancel={handleCancel}
             onOk={handleEditMessage}
-            footer={null}
         >
           <StyledEditMessageWrapper>
             <Text>Enter your text message</Text>
-            <Input
-                placeholder="Username"
+            <TextArea
+                placeholder="Text"
                 value={textMessage}
+                rows={4}
                 onChange={(e) => setTextMessage(e.target.value)}
             />
-            <Button type="primary" htmlType="submit" onClick={handleEditMessage}>
-              Edit
-            </Button>
           </StyledEditMessageWrapper>
         </Modal>
       </StyledModalWrapper>

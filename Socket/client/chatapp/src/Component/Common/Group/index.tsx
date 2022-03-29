@@ -11,7 +11,7 @@ import {
 
 interface Props {
   title: string;
-  icon: any;
+  icon?: any;
   detail?: any;
   onClick?: Function;
   className?: string;
@@ -20,7 +20,7 @@ interface Props {
 const Group = ({ title, icon, detail, onClick, className }: Props) => {
   return (
     <StyledGroupWrapper onClick={onClick}>
-      <StyledIcon className={className}>{icon}</StyledIcon>
+      { icon && <StyledIcon className={className}>{icon}</StyledIcon> }
       <StyledTitle>{title}</StyledTitle>
       <StyledDetail>{detail}</StyledDetail>
     </StyledGroupWrapper>

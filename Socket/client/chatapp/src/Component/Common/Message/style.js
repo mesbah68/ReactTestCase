@@ -44,6 +44,7 @@ export const StyledMessageText = Styled.div`
   }
 `;
 export const StyledIconsWrapper = Styled.div`
+  cursor: pointer;
   svg {
     margin-right: 10px;
     g, path {
@@ -53,7 +54,13 @@ export const StyledIconsWrapper = Styled.div`
 `;
 
 export const StyledModalWrapper = Styled.div`
-  .ant-modal-content {
+  .ant-modal-body {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  .ant-modal-footer {
     .ant-btn {
       border-radius: 14px;
     }
@@ -62,7 +69,6 @@ export const StyledModalWrapper = Styled.div`
 
 export const StyledEditMessageWrapper = Styled.div`
   display: flex;
-  padding: 50px 10px;
   flex-direction: column;
   button {
     margin-top: 15px;
