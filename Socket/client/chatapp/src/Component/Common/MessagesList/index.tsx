@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { io, Socket } from "socket.io-client";
 import {Avatar, Col, Row, Typography} from "antd";
 // @ts-ignore
+import { MenuIcon } from "@iconbox/jamicons";
+// @ts-ignore
 import { ArrowDown2TwoToneIcon, NotificationLightIcon } from "@iconbox/iconly";
 // @ts-ignore
 import { MoreVerticalFillIcon } from '@iconbox/eva';
@@ -25,10 +27,11 @@ import {
 interface Props {
   chatRoomTitle: string;
   socket: Socket;
-  sideBarVisibility: Function,
+  setSideBarVisibility: Function,
+  sideBarVisibility: Boolean,
 }
 
-const MessagesList = ({ chatRoomTitle, socket, sideBarVisibility }: Props) => {
+const MessagesList = ({ chatRoomTitle, socket, setSideBarVisibility, sideBarVisibility }: Props) => {
   const [showMore, setShowMore] = useState<boolean>(false);
   const { clearAllMessages, setMessages } = useMessageActions();
   const { setUser } = useUserActions();
@@ -58,7 +61,7 @@ const MessagesList = ({ chatRoomTitle, socket, sideBarVisibility }: Props) => {
   return (
       <StyledMessageWrapper>
           <StyledChatRoomHeader>
-            <MoreVerticalFillIcon size={2.5} onClick={() => sideBarVisibility(true)} />
+            <MenuIcon size={2.5} onClick={() => setSideBarVisibility(!sideBarVisibility)} />
             <Title level={5}>
               <span>💬 </span>
               {chatRoomTitle}

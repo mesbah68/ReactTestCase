@@ -6,11 +6,12 @@ import storage from "redux-persist/lib/storage";
 import messageReducer from "./message/reducers";
 import userReducer from "./user/reducers";
 import contactsReducer from "./contacts/reducers";
+import channelsReducer from "./channels/reducers";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "contacts"],
+  whitelist: ["user", "contacts","channels"],
 };
 
 const configureStore = () => {
@@ -19,6 +20,7 @@ const configureStore = () => {
     message: messageReducer,
     contacts: contactsReducer,
     user: userReducer,
+    channels: channelsReducer,
   });
   const persistedReducer = persistReducer(persistConfig, rootReducer);
 

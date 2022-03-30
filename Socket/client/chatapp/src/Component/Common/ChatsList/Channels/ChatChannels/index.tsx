@@ -12,6 +12,7 @@ import { StyledChatChannelsWrapper, StyledHeaderWrapper } from "./style";
 interface Props {
   socket: Socket;
   count?: string;
+  chatChannels?: any,
 }
 
 type User = {
@@ -19,7 +20,7 @@ type User = {
   name: string;
 };
 
-const ChatChannels = ({ socket, count }: Props) => {
+const ChatChannels = ({ socket, chatChannels }: Props) => {
   const [users, setUsers] = useState<User[]>([]);
   const [toggleIcon, setToggleIcon] = useState(true);
 
@@ -39,6 +40,10 @@ const ChatChannels = ({ socket, count }: Props) => {
     setToggleIcon(!toggleIcon);
   };
 
+  const channelsList = chatChannels.map((item: { name: string; icon: string; detail: string })  => (
+      <Group title={item.name} icon={item.icon} detail={item.detail === "star" ? <StarFillIcon /> : item.detail} />
+  ))
+
   return (
     <StyledChatChannelsWrapper>
       <StyledHeaderWrapper onClick={handleChangeIcon}>
@@ -49,15 +54,7 @@ const ChatChannels = ({ socket, count }: Props) => {
           <ArrowDown2TwoToneIcon onClick={handleChangeIcon} />
         )}
       </StyledHeaderWrapper>
-      {toggleIcon && (
-        <>
-          <Group title="Share-Ukhtae" icon="😻" detail={<StarFillIcon />} />
-          <Group title="General Chat" icon="💬" className="chat-icon" />
-          <Group title="Introducing" icon="👋" />
-          <Group title="Gibahin-Dribbble" icon="😂" />
-          <Group title="Share-Shot" icon="👍" />
-        </>
-      )}
+      {toggleIcon && channelsList}
     </StyledChatChannelsWrapper>
   );
 };

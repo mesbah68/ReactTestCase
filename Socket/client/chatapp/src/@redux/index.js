@@ -17,6 +17,15 @@ export { default as ContactsSelectors } from "./contacts/selectors";
 export { default as ContactsTypes } from "./contacts/types";
 
 /**
+ * Channels entity
+ */
+export { default as ChannelsActions } from "./channels/actions";
+export { default as useChannelsActions } from "./channels/hook";
+export { default as channelsReducers } from "./channels/reducers";
+export { default as ChannelsSelectors } from "./channels/selectors";
+export { default as ChannelsTypes } from "./channels/types";
+
+/**
  * User entity
  */
 export { default as UserActions } from "./user/actions";

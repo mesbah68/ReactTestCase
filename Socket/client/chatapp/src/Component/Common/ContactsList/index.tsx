@@ -49,6 +49,14 @@ const ContactsList = ({  }: Props) => {
       setLocalContacts(contacts);
   },[contacts])
 
+  useEffect(() => {
+      const filteredContacts = contacts.filter((contact: { name: string; }) => contact.name.includes(searchedItem))
+      setLocalContacts(filteredContacts);
+      if (!searchedItem) {
+          setLocalContacts(contacts);
+      }
+  },[searchedItem])
+
   const { Text } = Typography;
   const contactsList = localContacts.map(
     (item: { avatar: React.ReactNode; name: string; id: string }) => (
@@ -96,9 +104,9 @@ const ContactsList = ({  }: Props) => {
     setIsAddModalVisible(false);
   };
 
-  const handleSearchContact = (e: React.FormEvent) => {
+  const handleSearchContact = (e: any) => {
       e.preventDefault();
-      const filteredContacts = contacts.filter((item: { name: string; }) => item.name.toLowerCase() === searchedItem.toLowerCase());
+      const filteredContacts = contacts.filter((contact: { name: string; }) => contact.name.includes(searchedItem))
       setLocalContacts(filteredContacts);
       if (!searchedItem) {
           setLocalContacts(contacts);
@@ -109,7 +117,7 @@ const ContactsList = ({  }: Props) => {
       <StyledContactListWrapper>
         <StyledSearchWrapper>
             <form onSubmit={handleSearchContact} >
-                <Input placeholder="Search" value={searchedItem} onChange={(e) => setSearchedItem(e.target.value)} />
+                <Input placeholder="Search" value={searchedItem} onChange={(e) => setSearchedItem((e.target.value))} />
                 <SearchOutlineIcon size={3} onClick={handleSearchContact} />
             </form>
         </StyledSearchWrapper>
@@ -124,6 +132,17 @@ const ContactsList = ({  }: Props) => {
               visible={isAddModalVisible}
               onCancel={handleCancel}
               onOk={handleAddContact}
+              footer={[
+                  <Button
+                      type="link"
+                      onClick={handleCancel}
+                  >
+                      Cancle
+                  </Button>,
+                  <Button key="submit" type="primary" className="chat-btn" onClick={handleAddContact}>
+                      Add
+                  </Button>,
+              ]}
           >
             <StyledAddContactWrapper>
               <Text>Please enter your username</Text>
@@ -141,6 +160,17 @@ const ContactsList = ({  }: Props) => {
               visible={isEditModalVisible}
               onCancel={handleCancel}
               onOk={handleEditContact}
+              footer={[
+                  <Button
+                      type="link"
+                      onClick={handleCancel}
+                  >
+                      Cancle
+                  </Button>,
+                  <Button key="submit" type="primary" className="chat-btn" onClick={handleEditContact}>
+                      Edit
+                  </Button>,
+              ]}
           >
             <StyledAddContactWrapper>
               <Text>Please enter your username</Text>

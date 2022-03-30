@@ -21,9 +21,10 @@ import {
 interface Props {
   socket: Socket;
   count?: string;
+  voiceChannels?: any,
 }
 
-const VoiceChannels = ({ socket, count }: Props) => {
+const VoiceChannels = ({ socket, voiceChannels }: Props) => {
   const [users, setUsers] = useState<UserItems[]>([]);
   const [toggleIcon, setToggleIcon] = useState(true);
 
@@ -37,6 +38,10 @@ const VoiceChannels = ({ socket, count }: Props) => {
     e.preventDefault();
     setToggleIcon(!toggleIcon);
   };
+
+  const channelsList = voiceChannels.map((item: { name: string; icon: string; detail: string })  => (
+      <Group title={item.name} icon={item.icon} detail={item.detail} />
+  ))
 
   return (
     <StyledVoiceChannelsWrapper>
@@ -54,13 +59,7 @@ const VoiceChannels = ({ socket, count }: Props) => {
             <User user={user} icon={<VolumeUpCurvedIcon size={2} />} />
           </StyledUserItem>
         ))}
-      {toggleIcon && (
-        <>
-          <Group title="Podchess" icon="🎤" detail="3/5" />
-          <Group title="Design Terus" icon="🎨" detail="0/5" />
-          <Group title="Bincang Caem" icon="🤑" detail="0/5" />
-        </>
-      )}
+      {toggleIcon && channelsList}
     </StyledVoiceChannelsWrapper>
   );
 };

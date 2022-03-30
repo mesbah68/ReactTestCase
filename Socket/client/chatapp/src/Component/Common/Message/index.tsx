@@ -85,6 +85,17 @@ const Message = ({ messageItems, key, socket }: Prop) => {
             visible={isEditModalVisible}
             onCancel={handleCancel}
             onOk={handleEditMessage}
+            footer={[
+              <Button
+                  type="link"
+                  onClick={handleCancel}
+              >
+                Cancle
+              </Button>,
+              <Button key="submit" type="primary" className="chat-btn" onClick={handleEditMessage}>
+                Edit
+              </Button>,
+            ]}
         >
           <StyledEditMessageWrapper>
             <Text>Enter your text message</Text>

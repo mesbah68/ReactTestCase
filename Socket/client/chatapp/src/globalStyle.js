@@ -36,6 +36,9 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
   }
+  .chat-btn {
+    border-radius: 4px;
+  }
 `;
 
 export default GlobalStyle;

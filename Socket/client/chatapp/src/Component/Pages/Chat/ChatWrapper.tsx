@@ -57,7 +57,7 @@ const ChatWrapper = ({ chatRoomTitle }: Props) => {
                   </Drawer>
                 </Col>
                 <Col span={visible ? 18 : 24}>
-                  <MessagesList sideBarVisibility={setVisible} chatRoomTitle={chatRoomTitle} socket={socket} />
+                  <MessagesList setSideBarVisibility={setVisible} sideBarVisibility={visible} chatRoomTitle={chatRoomTitle} socket={socket} />
                 </Col>
               </Row>
           ) : (

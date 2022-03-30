@@ -31,17 +31,6 @@ const Messages = ({ socket }: Props) => {
     };
   }, [socket]);
 
-  useEffect(() => {
-    // messageRef.scrollTo({
-    //   // @ts-ignore
-    //   top: messageRef.current.offsetTop,
-    //   left: 0,
-    //   behavior: "smooth",
-    // });
-    console.log(messageRef);
-  },[messages])
-
-
   return (
     <StyledMessagesWrapper>
       <StyledMessageContent ref={messageRef}>

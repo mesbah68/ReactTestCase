@@ -6,8 +6,6 @@ import { Button, Typography, Avatar, Input } from "antd";
 // @ts-ignore
 import { DeleteLightIcon, EditSquareLightIcon } from "@iconbox/iconly";
 // @ts-ignore
-import { MenuIcon } from "@iconbox/jamicons";
-// @ts-ignore
 import { SearchOutlineIcon } from "@iconbox/eva";
 
 import  logo  from "./../../../assets/images/kLogo.png";
@@ -16,6 +14,7 @@ import kumpulo from "../../../assets/images/kumpulo.png";
 import {
   UserSelectors,
   useUserActions,
+  ChannelsSelectors,
 } from "../../../@redux";
 
 import Channels from "./Channels";
@@ -24,7 +23,6 @@ import {
   StyledChatListWrapper,
   StyledAvatarWrapper,
   StyledSearchWrapper,
-  StyledSystemWrapper,
   StyledIconWrapper,
 } from "./style";
 
@@ -36,9 +34,11 @@ interface Props {
 const ChatsList = ({ socket, setVisibility }: Props) => {
 
   const [searchedItem, setSearchedItem] = useState("");
+  const [channelsList, setChannelsList] = useState("");
 
   const user = useSelector(UserSelectors.getUser);
   const { setUser } = useUserActions();
+  const channels = useSelector(ChannelsSelectors.getChannels);
 
   const { Title, Text } = Typography;
   const CHANNELSCOUNT = "120";
@@ -53,6 +53,14 @@ const ChatsList = ({ socket, setVisibility }: Props) => {
       socket.off("users", listener);
     };
   }, [socket]);
+
+  useEffect(() => {
+    const filteredChannels = channels.filter((channel: { name: string; }) => channel.name.toLowerCase().includes(searchedItem.toLowerCase()))
+    setChannelsList(filteredChannels);
+    if (!searchedItem) {
+      setChannelsList(channels);
+    }
+  },[searchedItem])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,7 +78,6 @@ const ChatsList = ({ socket, setVisibility }: Props) => {
                     />
                     <img src={kumpulo} />
                   </StyledAvatarWrapper>
-                  <MenuIcon size={2.5} onClick={() => setVisibility(false)} />
                 </StyledIconWrapper>
             ) : (
                 "Chat"
@@ -83,7 +90,7 @@ const ChatsList = ({ socket, setVisibility }: Props) => {
                 <SearchOutlineIcon size={3} onClick={handleSearch} />
               </form>
             </StyledSearchWrapper>
-            <Channels socket={socket} count={CHANNELSCOUNT} />
+            <Channels socket={socket} count={CHANNELSCOUNT} channels={channelsList} />
           </>
         </StyledChatListWrapper>
   );
