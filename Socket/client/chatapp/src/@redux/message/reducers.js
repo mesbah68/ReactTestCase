@@ -27,7 +27,10 @@ export default function (state = initialValues, { type, payload }) {
         messagesList: state.messagesList.filter((item) => item?.messages?.id !== payload),
       };
     case types.CLEAR_ALL_MESSAGES:
-      return initialValues;
+      return {
+        ...state,
+        messagesList: state.messagesList.filter((item) => item?.to !== payload),
+      };
     default:
       return state;
   }

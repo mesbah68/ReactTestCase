@@ -50,9 +50,8 @@ io.on("connection", (socket) => {
   });
 
   // When chat has deleted
-  socket.on("deleteChat", () => {
-    messages.splice(0, messages.length);
-
+  socket.on("deleteChat", (chatTitle) => {
+    messages = messages.filter(item => item.to !== chatTitle);
     io.emit("deleteChat", messages);
   });
 

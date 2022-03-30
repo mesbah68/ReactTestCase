@@ -36,7 +36,7 @@ export default function useHook() {
    * Clear all messages
    */
   const clearAllMessages = useCallback(
-    () => dispatch({ type: types.CLEAR_ALL_MESSAGES }),
+    (title) => dispatch({ type: types.CLEAR_ALL_MESSAGES, payload: title }),
     [dispatch]
   );
 

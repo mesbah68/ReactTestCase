@@ -50,7 +50,7 @@ const MessagesList = ({ chatRoomTitle, socket, setSideBarVisibility, sideBarVisi
 
   const handleDeleteChat = (e: any) => {
     e.preventDefault();
-    clearAllMessages();
+    clearAllMessages(pathname);
     // @ts-ignore
     socket.emit("deleteChat");
     setShowMore(false);
