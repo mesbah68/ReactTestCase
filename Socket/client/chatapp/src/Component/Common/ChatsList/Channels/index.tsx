@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Socket } from "socket.io-client";
 
 import ChatChannels from "./ChatChannels";
@@ -14,8 +14,17 @@ interface Props {
 
 const Channels = ({ socket, count, channels }: Props) => {
 
-  const voiceChannels = channels.filter((channel: { type: string; }) => channel.type === "voice");
-  const chatChannels = channels.filter((channel: { type: string; }) => channel.type === "chat");
+  const[voiceChannels, setVoiceChannels] = useState([]);
+  const[chatChannels, setChatChannels] = useState([]);
+
+  useEffect(() => {
+      if (channels) {
+          const voiceChannelsList = channels.filter((channel: { type: string; }) => channel.type === "voice");
+          const chatChannelsList = channels.filter((channel: { type: string; }) => channel.type === "chat");
+          setChatChannels(chatChannelsList);
+          setVoiceChannels(voiceChannelsList);
+      }
+  },[channels])
 
   return (
     <StyledChannelsWrapper>

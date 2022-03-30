@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { Socket } from "socket.io-client";
 
 import {
@@ -28,6 +29,8 @@ const VoiceChannels = ({ socket, voiceChannels }: Props) => {
   const [users, setUsers] = useState<UserItems[]>([]);
   const [toggleIcon, setToggleIcon] = useState(true);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     socket.on("users", (users: any) => {
       setUsers(users);
@@ -40,7 +43,7 @@ const VoiceChannels = ({ socket, voiceChannels }: Props) => {
   };
 
   const channelsList = voiceChannels.map((item: { name: string; icon: string; detail: string })  => (
-      <Group title={item.name} icon={item.icon} detail={item.detail} />
+      <Group onClick={() => navigate(`/${item.name}`)} title={item.name} icon={item.icon} detail={item.detail} />
   ))
 
   return (

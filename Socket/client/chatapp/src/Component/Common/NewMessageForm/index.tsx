@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from 'react-router-dom';
 import { Form, Input, Button } from "antd";
 import { Socket } from "socket.io-client";
 // @ts-ignore
@@ -27,17 +28,18 @@ interface Props {
 
 const NewMessageForm = ({ socket }: Props) => {
   const user = useSelector(UserSelectors.getUser);
-  const messagesItem = useSelector(MessageSelectors.getMessagesList);
-  const { setMessages } = useMessageActions();
   const [message, setMessage] = useState<string>("");
   const [emojiPicker, setEmojiPicker] = useState<boolean>(false);
+
+  const location = useLocation();
+  const pathname = location.pathname.split('/')[1];
 
   const sendMsg = (e: React.FormEvent) => {
     e.preventDefault();
     if (message) {
       const id = uuid();
       const messages = { text: message, id : id};
-      socket.emit("sendMessage", { user, messages });
+      socket.emit("sendMessage", { user, messages, to: pathname });
     }
     setMessage("");
     setEmojiPicker(false);

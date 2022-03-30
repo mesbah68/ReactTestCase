@@ -8,4 +8,5 @@ export const StyledHeaderWrapper = Styled.div`
   padding: 20px 0 0;
   color: #858585;
   font-weight: bold;
+  cursor: default;
 `;

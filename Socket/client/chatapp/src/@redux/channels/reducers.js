@@ -12,7 +12,7 @@ export const initialValues = {
     },
     {
       id: uuid(),
-      name: "General Chat",
+      name: "General-Chat",
       icon: "💬",
       type: "chat",
     },
@@ -43,14 +43,14 @@ export const initialValues = {
     },
     {
       id: uuid(),
-      name: "Design Terus",
+      name: "Design-Terus",
       detail: "0/5",
       icon: "🎨",
       type: "voice",
     },
     {
       id: uuid(),
-      name: "Bincang Caem",
+      name: "Bincang-Caem",
       detail: "0/5",
       icon: "🤑",
       type: "voice",

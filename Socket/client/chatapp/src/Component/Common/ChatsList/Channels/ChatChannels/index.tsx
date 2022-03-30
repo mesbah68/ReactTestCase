@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 // @ts-ignore
 import { ArrowDown2TwoToneIcon, ArrowUp2TwoToneIcon } from "@iconbox/iconly";
 // @ts-ignore
@@ -24,6 +25,8 @@ const ChatChannels = ({ socket, chatChannels }: Props) => {
   const [users, setUsers] = useState<User[]>([]);
   const [toggleIcon, setToggleIcon] = useState(true);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const listener = (users: any) => {
       setUsers(users);
@@ -41,7 +44,7 @@ const ChatChannels = ({ socket, chatChannels }: Props) => {
   };
 
   const channelsList = chatChannels.map((item: { name: string; icon: string; detail: string })  => (
-      <Group title={item.name} icon={item.icon} detail={item.detail === "star" ? <StarFillIcon /> : item.detail} />
+      <Group onClick={() => navigate(`/${item.name}`)} title={item.name} icon={item.icon} detail={item.detail === "star" ? <StarFillIcon /> : item.detail} />
   ))
 
   return (
