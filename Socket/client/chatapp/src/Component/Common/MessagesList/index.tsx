@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import {useLocation} from "react-router-dom";
 import { io, Socket } from "socket.io-client";
 import {Avatar, Col, Row, Typography} from "antd";
 // @ts-ignore
@@ -37,6 +38,9 @@ const MessagesList = ({ chatRoomTitle, socket, setSideBarVisibility, sideBarVisi
   const { setUser } = useUserActions();
   const { Title, Text } = Typography;
 
+  const location = useLocation();
+  const pathname = location.pathname.split('/')[1];
+
   const user = useSelector(UserSelectors.getUser);
 
   const handleShowMore = (e: React.FormEvent) => {
@@ -64,7 +68,7 @@ const MessagesList = ({ chatRoomTitle, socket, setSideBarVisibility, sideBarVisi
             <MenuIcon size={2.5} onClick={() => setSideBarVisibility(!sideBarVisibility)} />
             <Title level={5}>
               <span>💬 </span>
-              {chatRoomTitle}
+              {pathname}
             </Title>
             <StyledProfileWrapper>
               <NotificationLightIcon />
