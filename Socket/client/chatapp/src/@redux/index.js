@@ -33,3 +33,12 @@ export { default as useUserActions } from "./user/hook";
 export { default as UserReducers } from "./user/reducers";
 export { default as UserSelectors } from "./user/selectors";
 export { default as UserTypes } from "./user/types";
+
+/**
+ * chat entity
+ */
+export { default as chatActions } from "./chat/actions";
+export { default as useActiveChatActions } from "./chat/hook";
+export { default as ChatReducers } from "./chat/reducers";
+export { default as ChatSelectors } from "./chat/selectors";
+export { default as ChatTypes } from "./chat/types";

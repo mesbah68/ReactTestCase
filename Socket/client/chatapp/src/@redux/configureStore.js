@@ -7,11 +7,12 @@ import messageReducer from "./message/reducers";
 import userReducer from "./user/reducers";
 import contactsReducer from "./contacts/reducers";
 import channelsReducer from "./channels/reducers";
+import chatReducer from "./chat/reducers";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "contacts","channels"],
+  whitelist: ["user", "contacts","channels","chat"],
 };
 
 const configureStore = () => {
@@ -21,6 +22,7 @@ const configureStore = () => {
     contacts: contactsReducer,
     user: userReducer,
     channels: channelsReducer,
+    chat: chatReducer,
   });
   const persistedReducer = persistReducer(persistConfig, rootReducer);
 

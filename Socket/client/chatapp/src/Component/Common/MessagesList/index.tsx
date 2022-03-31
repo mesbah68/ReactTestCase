@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import {useLocation} from "react-router-dom";
 import { io, Socket } from "socket.io-client";
 import {Avatar, Col, Row, Typography} from "antd";
 // @ts-ignore
@@ -10,7 +9,7 @@ import { ArrowDown2TwoToneIcon, NotificationLightIcon } from "@iconbox/iconly";
 // @ts-ignore
 import { MoreVerticalFillIcon } from '@iconbox/eva';
 
-import { UserSelectors, useMessageActions, useUserActions } from "../../../@redux";
+import { UserSelectors, useMessageActions, useUserActions, ChatSelectors } from "../../../@redux";
 
 import Group from "../Group";
 import Messages from "../../Common/Messages";
@@ -32,16 +31,14 @@ interface Props {
   sideBarVisibility: Boolean,
 }
 
-const MessagesList = ({ chatRoomTitle, socket, setSideBarVisibility, sideBarVisibility }: Props) => {
+const MessagesList = ({ socket, setSideBarVisibility, sideBarVisibility }: Props) => {
   const [showMore, setShowMore] = useState<boolean>(false);
   const { clearAllMessages, setMessages } = useMessageActions();
   const { setUser } = useUserActions();
   const { Title, Text } = Typography;
 
-  const location = useLocation();
-  const pathname = location.pathname.split('/')[1];
-
   const user = useSelector(UserSelectors.getUser);
+  const activeChat = useSelector(ChatSelectors.getActiveChat);
 
   const handleShowMore = (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,9 +47,9 @@ const MessagesList = ({ chatRoomTitle, socket, setSideBarVisibility, sideBarVisi
 
   const handleDeleteChat = (e: any) => {
     e.preventDefault();
-    clearAllMessages(pathname);
+    clearAllMessages(activeChat.name);
     // @ts-ignore
-    socket.emit("deleteChat");
+    socket.emit("deleteChat", activeChat.name);
     setShowMore(false);
   }
 
@@ -61,14 +58,13 @@ const MessagesList = ({ chatRoomTitle, socket, setSideBarVisibility, sideBarVisi
     setUser([]);
     setMessages([]);
   };
-
   return (
       <StyledMessageWrapper>
           <StyledChatRoomHeader>
             <MenuIcon size={2.5} onClick={() => setSideBarVisibility(!sideBarVisibility)} />
             <Title level={5}>
               <span>💬 </span>
-              {pathname}
+              {activeChat.name}
             </Title>
             <StyledProfileWrapper>
               <NotificationLightIcon />

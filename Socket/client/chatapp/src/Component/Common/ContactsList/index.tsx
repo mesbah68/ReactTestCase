@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { Button, Typography, Avatar, Input, Modal, Form } from "antd";
 import { Socket } from "socket.io-client";
@@ -12,6 +13,7 @@ import { SearchOutlineIcon } from "@iconbox/eva";
 import {
   useContactsActions,
   ContactsSelectors,
+  useActiveChatActions,
 } from "../../../@redux";
 
 import {
@@ -36,6 +38,7 @@ const ContactsList = ({  }: Props) => {
   const { deleteContact } = useContactsActions();
   const { updateContact } = useContactsActions();
   const { addContact } = useContactsActions();
+  const navigate = useNavigate();
 
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
@@ -44,6 +47,8 @@ const ContactsList = ({  }: Props) => {
   const [username, setUsername] = useState("");
   const [updatedContactId, setUpdatedContactId] = useState("");
   const [searchedItem, setSearchedItem] = useState("");
+
+  const { setActiveChat } = useActiveChatActions();
 
   useEffect(() => {
       setLocalContacts(contacts);
@@ -55,14 +60,19 @@ const ContactsList = ({  }: Props) => {
       if (!searchedItem) {
           setLocalContacts(contacts);
       }
-  },[searchedItem])
+  },[searchedItem]);
+
+  const handleSetActiveChat = (chatName: string,chatId: string) => {
+      setActiveChat({name: chatName,id: chatId});
+      navigate("/");
+  }
 
   const { Text } = Typography;
   const contactsList = localContacts.map(
     (item: { avatar: React.ReactNode; name: string; id: string }) => (
       <StyledAvatarWrapper>
           <Avatar src={item.avatar} size="large" >{item.name[0].toUpperCase()}</Avatar>
-        <StyledUsername>{item.name}</StyledUsername>
+        <StyledUsername onClick={() => handleSetActiveChat(item.name,item.id) }>{item.name}</StyledUsername>
         <StyledIconWrapper>
           <EditSquareLightIcon
             onClick={() => {

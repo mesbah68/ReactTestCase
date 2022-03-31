@@ -9,6 +9,9 @@ import {
   // @ts-ignore
 } from "@iconbox/iconly";
 
+
+import { useActiveChatActions } from "../../../../../@redux";
+
 import User from "../../../User";
 import Group from "../../../Group";
 import { UserItems } from "../../../../../Constant/GlobalType";
@@ -29,6 +32,8 @@ const VoiceChannels = ({ socket, voiceChannels }: Props) => {
   const [users, setUsers] = useState<UserItems[]>([]);
   const [toggleIcon, setToggleIcon] = useState(true);
 
+  const { setActiveChat } = useActiveChatActions();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,8 +47,13 @@ const VoiceChannels = ({ socket, voiceChannels }: Props) => {
     setToggleIcon(!toggleIcon);
   };
 
-  const channelsList = voiceChannels.map((item: { name: string; icon: string; detail: string })  => (
-      <Group onClick={() => navigate(`/${item.name}`)} title={item.name} icon={item.icon} detail={item.detail} />
+  const handleSetActiveGroup = (group: string, id: string) => {
+    navigate(`/${group.replace(/\s/g, '')}`);
+    setActiveChat({name: group, id: id});
+  }
+
+  const channelsList = voiceChannels.map((item: { name: string; icon: string; detail: string, id: string })  => (
+      <Group onClick={() => handleSetActiveGroup(item.name, item.id)} title={item.name} icon={item.icon} detail={item.detail} />
   ))
 
   return (

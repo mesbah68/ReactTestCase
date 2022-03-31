@@ -11,13 +11,13 @@ function App() {
               <Routes>
                 <Route path="/" element={<ChatWrapper chatRoomTitle="General Chat" />} />
                 <Route path="/share-Ukhtae" element={<ChatWrapper chatRoomTitle="General Chat" />} />
-                <Route path="/general-Chat" element={<ChatWrapper chatRoomTitle="General Chat" />} />
+                <Route path="/generalChat" element={<ChatWrapper chatRoomTitle="General Chat" />} />
                 <Route path="/gibahin-Dribbble" element={<ChatWrapper chatRoomTitle="General Chat" />} />
                 <Route path="/share-Shot" element={<ChatWrapper chatRoomTitle="General Chat" />} />
                 <Route path="/introducing" element={<ChatWrapper chatRoomTitle="General Chat" />} />
                 <Route path="/Podchess" element={<ChatWrapper chatRoomTitle="General Chat" />} />
-                <Route path="/Design-Terus" element={<ChatWrapper chatRoomTitle="General Chat" />} />
-                <Route path="/Bincang-Caem" element={<ChatWrapper chatRoomTitle="General Chat" />} />
+                <Route path="/DesignTerus" element={<ChatWrapper chatRoomTitle="General Chat" />} />
+                <Route path="/BincangCaem" element={<ChatWrapper chatRoomTitle="General Chat" />} />
               </Routes>
           </Router>
       )

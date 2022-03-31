@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation } from 'react-router-dom';
+import { useSelector } from "react-redux";
 import { Form, Input, Button } from "antd";
 import { Socket } from "socket.io-client";
 // @ts-ignore
@@ -13,14 +13,14 @@ import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
 import HappyIcon from "../../../assets/images/happy.png";
 
-import { MessageSelectors, UserSelectors, useMessageActions } from "../../../@redux";
+import { ChatSelectors, UserSelectors } from "../../../@redux";
 
 import {
   StyledMessageWrapper,
   StyledEmojiPickerWrapper,
   StyledEmojiIcon,
 } from "./style";
-import {useSelector} from "react-redux";
+
 
 interface Props {
   socket: Socket;
@@ -31,15 +31,14 @@ const NewMessageForm = ({ socket }: Props) => {
   const [message, setMessage] = useState<string>("");
   const [emojiPicker, setEmojiPicker] = useState<boolean>(false);
 
-  const location = useLocation();
-  const pathname = location.pathname.split('/')[1];
+  const activeChat = useSelector(ChatSelectors.getActiveChat);
 
   const sendMsg = (e: React.FormEvent) => {
     e.preventDefault();
     if (message) {
       const id = uuid();
       const messages = { text: message, id : id};
-      socket.emit("sendMessage", { user, messages, to: pathname });
+      socket.emit("sendMessage", { user, messages, to: activeChat.name });
     }
     setMessage("");
     setEmojiPicker(false);

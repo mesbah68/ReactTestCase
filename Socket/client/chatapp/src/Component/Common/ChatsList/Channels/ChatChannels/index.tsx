@@ -8,6 +8,8 @@ import { Socket } from "socket.io-client";
 
 import Group from "../../../Group";
 
+import { useActiveChatActions } from "../../../../../@redux";
+
 import { StyledChatChannelsWrapper, StyledHeaderWrapper } from "./style";
 
 interface Props {
@@ -24,6 +26,8 @@ type User = {
 const ChatChannels = ({ socket, chatChannels }: Props) => {
   const [users, setUsers] = useState<User[]>([]);
   const [toggleIcon, setToggleIcon] = useState(true);
+
+  const { setActiveChat } = useActiveChatActions();
 
   const navigate = useNavigate();
 
@@ -43,8 +47,15 @@ const ChatChannels = ({ socket, chatChannels }: Props) => {
     setToggleIcon(!toggleIcon);
   };
 
-  const channelsList = chatChannels.map((item: { name: string; icon: string; detail: string })  => (
-      <Group onClick={() => navigate(`/${item.name}`)} title={item.name} icon={item.icon} detail={item.detail === "star" ? <StarFillIcon /> : item.detail} />
+  const handleSetActiveGroup = (group: string, id: string) => {
+    navigate(`/${group.replace(/\s/g, '')}`);
+    setActiveChat({name: group, id: id});
+  }
+
+
+  const channelsList = chatChannels.map((item: { name: string; icon: string; detail: string, id: string })  => (
+      // @ts-ignore
+      <Group onClick={() => handleSetActiveGroup(item.name, item.id)} title={item.name} icon={item.icon} detail={item.detail === "star" ? <StarFillIcon /> : item.detail} />
   ))
 
   return (
