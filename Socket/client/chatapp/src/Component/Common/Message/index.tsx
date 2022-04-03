@@ -9,6 +9,8 @@ import { EditSquareLightIcon, DeleteLightIcon } from "@iconbox/iconly";
 
 import { UserSelectors, useMessageActions, MessageSelectors } from "../../../@redux";
 
+// import { deleteMessageMutation, getMessagesQuery } from '../../queries';
+
 import { MessageItems } from "../../../Constant/GlobalType";
 import { StyledAvatarWrapper } from "../User/style";
 
@@ -19,6 +21,7 @@ import {
   StyledModalWrapper,
   StyledEditMessageWrapper,
 } from "./style";
+import {useMutation} from "@apollo/client";
 
 interface Prop {
   messageItems: MessageItems;
@@ -30,6 +33,9 @@ const Message = ({ messageItems, key, socket }: Prop) => {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [textMessage, setTextMessage] = useState("");
   const { removeMessage, editMessage } = useMessageActions();
+
+  // const [deleteMessage] = useMutation(deleteMessageMutation);
+
   const {Text} = Typography;
   const { TextArea } = Input;
   // @ts-ignore
@@ -38,14 +44,20 @@ const Message = ({ messageItems, key, socket }: Prop) => {
 
   const handleRemoveMessage = (e: React.FormEvent) => {
     e.preventDefault();
-    socket.emit("deleteMessage", messageItems.messages.id );
-    removeMessage(messageItems?.messages?.id);
+    socket.emit("deleteMessage", messageItems.id );
+    removeMessage(messageItems?.id);
+    // deleteMessage({
+    //   variables: {
+    //     id: messageItems?.id,
+    //   },
+    //   refetchQueries: [{query: getMessagesQuery}]
+    // });
   }
 
   const handleEditMessage = (e: React.FormEvent) => {
     e.preventDefault();
-    socket.emit("editMessage", {id:messageItems.messages.id, text: textMessage });
-    editMessage({id:messageItems?.messages?.id, text:textMessage});
+    editMessage({id:messageItems?.id, text:textMessage});
+    socket.emit("editMessage", {id:messageItems?.id, text: textMessage });
     handleCancel();
   }
 
@@ -61,12 +73,12 @@ const Message = ({ messageItems, key, socket }: Prop) => {
     <StyledMessageItem className={isCurrentUser && "currentUser"}>
       <StyledAvatarWrapper>
         <Badge dot>
-          <Avatar icon={<UserOutlined />} size="large" />
+          <Avatar size="large" >{messageItems.to}</Avatar>
         </Badge>
       </StyledAvatarWrapper>
       <StyledMessageText>
         <div className={`bg-${isCurrentUser ? "blue" : "white"}`}>
-          {messageItems?.messages?.text}
+          {messageItems?.text}
         </div>
         <span className={isCurrentUser ? "currentUser" : ""}>8h ago</span>
       </StyledMessageText>

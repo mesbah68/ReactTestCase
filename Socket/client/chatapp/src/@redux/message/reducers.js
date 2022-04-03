@@ -14,17 +14,17 @@ export default function (state = initialValues, { type, payload }) {
       };
     case types.EDIT_MESSAGE:
       const editedMessage = state.messagesList.find(
-          (item) => item?.messages?.id === payload.id
+          (item) => item?.id === payload.id
       );
       const editedMessageIndex = state.messagesList.indexOf(editedMessage);
-      state.messagesList[editedMessageIndex].messages.text = payload.text;
+      state.messagesList[editedMessageIndex].text = payload.text;
       return {
-        ...state,
+        ...state
       };
     case types.REMOVE_MESSAGE:
       return {
         ...state,
-        messagesList: state.messagesList.filter((item) => item?.messages?.id !== payload),
+        messagesList: state.messagesList.filter((item) => item?.id !== payload),
       };
     case types.CLEAR_ALL_MESSAGES:
       return {

@@ -14,14 +14,19 @@ import {
 
 interface Props {
   socket: Socket;
+  data: any;
 }
 
-const Messages = ({ socket }: Props) => {
+const Messages = ({ socket, data }: Props) => {
   const messages = useSelector(MessageSelectors.getMessagesList);
   const { setMessages } = useMessageActions();
   const messageRef = useRef(null);
 
   const activeChat = useSelector(ChatSelectors.getActiveChat);
+
+  useEffect(() => {
+    setMessages(data?.messages);
+  },[data]);
 
   useEffect(() => {
     const listener = (message: any) => {
@@ -34,17 +39,17 @@ const Messages = ({ socket }: Props) => {
     };
   }, [socket]);
 
-  const filteredMessages = messages.filter((msg: { to: string; }) => msg.to === activeChat.name);
+  const filteredMessages = messages?.filter((msg: { to: string; }) => msg?.to === activeChat?.name);
 
   return (
     <StyledMessagesWrapper>
       <StyledMessageContent ref={messageRef}>
-        {filteredMessages.length ?
+        {filteredMessages?.length > 0 &&
             filteredMessages?.map((message: any, index: number) => (
             <StyledMessageItem>
               <Message key={index} messageItems={message} socket={socket} />
             </StyledMessageItem>
-        )) : null }
+        ))}
       </StyledMessageContent>
       <NewMessageForm socket={socket} />
     </StyledMessagesWrapper>

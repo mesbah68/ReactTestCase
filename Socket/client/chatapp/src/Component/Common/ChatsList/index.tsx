@@ -4,7 +4,7 @@ import { Socket } from "socket.io-client";
 import { Button, Typography, Avatar, Input } from "antd";
 
 // @ts-ignore
-import { DeleteLightIcon, EditSquareLightIcon } from "@iconbox/iconly";
+import { DeleteLightIcon, EditSquareLightIcon, VolumeUpCurvedIcon } from "@iconbox/iconly";
 // @ts-ignore
 import { SearchOutlineIcon } from "@iconbox/eva";
 
@@ -25,6 +25,8 @@ import {
   StyledSearchWrapper,
   StyledIconWrapper,
 } from "./style";
+import {StyledUserItem} from "./Channels/VoiceChannels/style";
+import User from "../User";
 
 interface Props {
   socket: Socket;
@@ -91,6 +93,9 @@ const ChatsList = ({ socket, setVisibility }: Props) => {
               </form>
             </StyledSearchWrapper>
             <Channels socket={socket} count={CHANNELSCOUNT} channels={channelsList} />
+            <StyledUserItem>
+              <User user={user} icon={<VolumeUpCurvedIcon size={2} />} />
+            </StyledUserItem>
           </>
         </StyledChatListWrapper>
   );

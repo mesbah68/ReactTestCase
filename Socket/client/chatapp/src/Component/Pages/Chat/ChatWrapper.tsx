@@ -18,18 +18,14 @@ import {
   StyledChatWrapper,
 } from "./style";
 
-interface Props {
-  chatRoomTitle: string;
-}
-
-const ChatWrapper = ({ chatRoomTitle }: Props) => {
+const ChatWrapper = () => {
   const [socket, setSocket] = useState<Socket>();
   const [visible, setVisible] = useState(true);
 
   const user = useSelector(UserSelectors.getUser);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:4000");
+    const newSocket = io("http://localhost:4002");
     setSocket(newSocket);
   }, []);
 
@@ -57,7 +53,7 @@ const ChatWrapper = ({ chatRoomTitle }: Props) => {
                   </Drawer>
                 </Col>
                 <Col span={visible ? 18 : 24}>
-                  <MessagesList setSideBarVisibility={setVisible} sideBarVisibility={visible} chatRoomTitle={chatRoomTitle} socket={socket} />
+                  <MessagesList setSideBarVisibility={setVisible} sideBarVisibility={visible} socket={socket} />
                 </Col>
               </Row>
           ) : (

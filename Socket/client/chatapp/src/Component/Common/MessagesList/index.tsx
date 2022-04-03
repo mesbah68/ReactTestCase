@@ -9,11 +9,15 @@ import { ArrowDown2TwoToneIcon, NotificationLightIcon } from "@iconbox/iconly";
 // @ts-ignore
 import { MoreVerticalFillIcon } from '@iconbox/eva';
 
+import { useQuery } from '@apollo/client';
+
 import { UserSelectors, useMessageActions, useUserActions, ChatSelectors } from "../../../@redux";
 
 import Group from "../Group";
 import Messages from "../../Common/Messages";
 import ContactsList from "../../Common/ContactsList";
+
+import { getMessagesQuery } from '../../queries';
 
 import {
   StyledMessageContent,
@@ -25,7 +29,6 @@ import {
 } from "./style";
 
 interface Props {
-  chatRoomTitle: string;
   socket: Socket;
   setSideBarVisibility: Function,
   sideBarVisibility: Boolean,
@@ -34,6 +37,8 @@ interface Props {
 const MessagesList = ({ socket, setSideBarVisibility, sideBarVisibility }: Props) => {
   const [showMore, setShowMore] = useState<boolean>(false);
   const { clearAllMessages, setMessages } = useMessageActions();
+  const { loading, data } = useQuery(getMessagesQuery);
+
   const { setUser } = useUserActions();
   const { Title, Text } = Typography;
 
@@ -58,6 +63,7 @@ const MessagesList = ({ socket, setSideBarVisibility, sideBarVisibility }: Props
     setUser([]);
     setMessages([]);
   };
+
   return (
       <StyledMessageWrapper>
           <StyledChatRoomHeader>
@@ -88,7 +94,7 @@ const MessagesList = ({ socket, setSideBarVisibility, sideBarVisibility }: Props
           <StyledMessageContent>
             <Row>
               <Col span={16}>
-                <Messages socket={socket} />
+                <Messages socket={socket} data={data} />
               </Col>
               <Col span={8}>
                 <ContactsList socket={socket} />

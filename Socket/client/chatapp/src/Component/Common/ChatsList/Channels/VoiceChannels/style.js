@@ -7,7 +7,7 @@ export const StyledUserItem = Styled.div`
   align-items: center;
   background-color: #fff;
   border-radius: 15px;
-  margin-bottom: 10px;
+  margin-top: 10px;
   > div {
     width: 100%;
   }

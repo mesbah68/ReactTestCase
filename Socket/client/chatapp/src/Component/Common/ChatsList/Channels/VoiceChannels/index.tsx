@@ -48,7 +48,7 @@ const VoiceChannels = ({ socket, voiceChannels }: Props) => {
   };
 
   const handleSetActiveGroup = (group: string, id: string) => {
-    navigate(`/${group.replace(/\s/g, '')}`);
+    navigate(`/channel/${group.replace(/\s/g, '')}`);
     setActiveChat({name: group, id: id});
   }
 
@@ -66,12 +66,6 @@ const VoiceChannels = ({ socket, voiceChannels }: Props) => {
           <ArrowDown2TwoToneIcon onClick={handleChangeIcon} />
         )}
       </StyledHeaderWrapper>
-      {toggleIcon &&
-        users.map((user: any, index: number) => (
-          <StyledUserItem key={index}>
-            <User user={user} icon={<VolumeUpCurvedIcon size={2} />} />
-          </StyledUserItem>
-        ))}
       {toggleIcon && channelsList}
     </StyledVoiceChannelsWrapper>
   );

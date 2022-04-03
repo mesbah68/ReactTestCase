@@ -1,16 +1,7 @@
 export type MessageItems = {
-  text: any;
-  messages: any;
-  user:
-    {
-    id: string,
-    name?: string
-    }
-  ;
-  message: {
-    id: string,
-    text: string,
-  };
+  text: string;
+  id: string;
+  to: string;
 };
 
 export type UserItems = {

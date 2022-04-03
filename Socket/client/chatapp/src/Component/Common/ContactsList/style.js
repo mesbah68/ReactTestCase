@@ -31,7 +31,6 @@ export const StyledAvatarWrapper = Styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 20px;
 `;
 
 export const StyledSearchWrapper = Styled.div`
@@ -108,6 +107,9 @@ export const StyledHeaderWrapper = Styled.div`
 `;
 
 export const StyledIconWrapper = Styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   svg {
     margin: 5px;
@@ -131,4 +133,11 @@ export const StyledAddContactButton = Styled.div`
     span {
         padding-top: 5px;
     }
+`;
+export const StyledContactWrapper = Styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    cursor: pointer;
 `;

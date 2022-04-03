@@ -9,15 +9,9 @@ function App() {
   return (
           <Router>
               <Routes>
-                <Route path="/" element={<ChatWrapper chatRoomTitle="General Chat" />} />
-                <Route path="/share-Ukhtae" element={<ChatWrapper chatRoomTitle="General Chat" />} />
-                <Route path="/generalChat" element={<ChatWrapper chatRoomTitle="General Chat" />} />
-                <Route path="/gibahin-Dribbble" element={<ChatWrapper chatRoomTitle="General Chat" />} />
-                <Route path="/share-Shot" element={<ChatWrapper chatRoomTitle="General Chat" />} />
-                <Route path="/introducing" element={<ChatWrapper chatRoomTitle="General Chat" />} />
-                <Route path="/Podchess" element={<ChatWrapper chatRoomTitle="General Chat" />} />
-                <Route path="/DesignTerus" element={<ChatWrapper chatRoomTitle="General Chat" />} />
-                <Route path="/BincangCaem" element={<ChatWrapper chatRoomTitle="General Chat" />} />
+                <Route path="/" element={<ChatWrapper />} />
+                <Route path="/channel/:title" element={<ChatWrapper />} />
+                <Route path="/contact/:name" element={<ChatWrapper />} />
               </Routes>
           </Router>
       )

@@ -8,12 +8,16 @@ import uuid from "react-uuid";
 import { PaperPlaneIcon } from "@iconbox/ion";
 // @ts-ignore
 import { AttachmentIcon } from "@iconbox/jamicons";
+
+import { useMutation } from '@apollo/client';
 // @ts-ignore
 import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
 import HappyIcon from "../../../assets/images/happy.png";
 
 import { ChatSelectors, UserSelectors } from "../../../@redux";
+import { getMessagesMutation, getMessagesQuery } from '../../queries';
+
 
 import {
   StyledMessageWrapper,
@@ -32,13 +36,20 @@ const NewMessageForm = ({ socket }: Props) => {
   const [emojiPicker, setEmojiPicker] = useState<boolean>(false);
 
   const activeChat = useSelector(ChatSelectors.getActiveChat);
+  const [messagesMutation] = useMutation(getMessagesMutation);
 
   const sendMsg = (e: React.FormEvent) => {
     e.preventDefault();
     if (message) {
-      const id = uuid();
-      const messages = { text: message, id : id};
-      socket.emit("sendMessage", { user, messages, to: activeChat.name });
+      socket.emit("sendMessage", { user, id : uuid(), text: message, to: activeChat.name });
+      // messagesMutation({
+      //   variables: {
+      //     text: message,
+      //     id: id,
+      //     to: activeChat.name
+      //   },
+      //   refetchQueries: [{query: getMessagesQuery}]
+      // });
     }
     setMessage("");
     setEmojiPicker(false);

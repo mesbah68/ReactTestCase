@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
+// @ts-ignore
+import uuid from "react-uuid";
 import { Button, Typography, Avatar, Input, Modal, Form } from "antd";
 import { Socket } from "socket.io-client";
 // @ts-ignore
@@ -26,7 +28,8 @@ import {
   StyledContactListWrapper,
   StyledHeaderWrapper,
   StyledSearchWrapper,
-  StyledAddContactButton
+  StyledAddContactButton,
+  StyledContactWrapper,
 } from "./style";
 
 interface Props {
@@ -63,32 +66,35 @@ const ContactsList = ({  }: Props) => {
   },[searchedItem]);
 
   const handleSetActiveChat = (chatName: string,chatId: string) => {
+      navigate(`/contact/${chatName}`);
       setActiveChat({name: chatName,id: chatId});
-      navigate("/");
   }
 
   const { Text } = Typography;
   const contactsList = localContacts.map(
     (item: { avatar: React.ReactNode; name: string; id: string }) => (
-      <StyledAvatarWrapper>
-          <Avatar src={item.avatar} size="large" >{item.name[0].toUpperCase()}</Avatar>
-        <StyledUsername onClick={() => handleSetActiveChat(item.name,item.id) }>{item.name}</StyledUsername>
-        <StyledIconWrapper>
-          <EditSquareLightIcon
-            onClick={() => {
-              showEditModal();
-              setUpdatedContactId(item.id);
-            }}
-          />
-          <DeleteLightIcon
-            onClick={() => {
-              deleteContact(item.id);
-            }}
-          >
-            Delete
-          </DeleteLightIcon>
-        </StyledIconWrapper>
-      </StyledAvatarWrapper>
+        <StyledContactWrapper>
+            <StyledAvatarWrapper onClick={() => handleSetActiveChat(item.name,item.id) }>
+                <Avatar src={item.avatar + uuid()} size="large" >{item.name[0].toUpperCase()}</Avatar>
+                <StyledUsername>{item.name}</StyledUsername>
+            </StyledAvatarWrapper>
+            <StyledIconWrapper>
+                <EditSquareLightIcon
+                    onClick={() => {
+                        showEditModal();
+                        setUpdatedContactId(item.id);
+                    }}
+                />
+                <DeleteLightIcon
+                    onClick={() => {
+                        deleteContact(item.id);
+                    }}
+                >
+                    Delete
+                </DeleteLightIcon>
+            </StyledIconWrapper>
+        </StyledContactWrapper>
+
     )
   );
 

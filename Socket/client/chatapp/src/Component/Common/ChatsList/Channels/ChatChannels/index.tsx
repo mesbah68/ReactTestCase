@@ -48,10 +48,9 @@ const ChatChannels = ({ socket, chatChannels }: Props) => {
   };
 
   const handleSetActiveGroup = (group: string, id: string) => {
-    navigate(`/${group.replace(/\s/g, '')}`);
+    navigate(`/channel/${group.replace(/\s/g, '')}`);
     setActiveChat({name: group, id: id});
   }
-
 
   const channelsList = chatChannels.map((item: { name: string; icon: string; detail: string, id: string })  => (
       // @ts-ignore
