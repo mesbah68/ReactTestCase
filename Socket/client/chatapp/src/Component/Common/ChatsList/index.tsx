@@ -94,7 +94,7 @@ const ChatsList = ({ socket, setVisibility }: Props) => {
             </StyledSearchWrapper>
             <Channels socket={socket} count={CHANNELSCOUNT} channels={channelsList} />
             <StyledUserItem>
-              <User user={user} icon={<VolumeUpCurvedIcon size={2} />} />
+              <User user={user[0]} icon={<VolumeUpCurvedIcon size={2} />} />
             </StyledUserItem>
           </>
         </StyledChatListWrapper>

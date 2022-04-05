@@ -39,12 +39,6 @@ export const StyledAvatarWrapper = Styled.div`
   }
 `;
 
-export const StyledUserName = Styled.span`
-  flex-grow: 1;
-  justify-content: flex-start !important;
-  padding-left: 10px;
-`;
-
 export const StyledSearchWrapper = Styled.div`
   margin-top: 30px;
   position: relative;
@@ -57,16 +51,6 @@ export const StyledSearchWrapper = Styled.div`
     right: 8px;
     top: 6px;
     cursor: pointer;
-  }
-`;
-
-export const StyledSystemWrapper = Styled.div`
-  border-top: 1px solid #f3f3f3;
-  padding: 15px 0px;
-  margin-top: 10px;
-  h5 {
-    font-size: 13px;
-    color: #737373;
   }
 `;
 
@@ -117,20 +101,6 @@ export const StyledMoreOptionWrapper = Styled.div`
 
 export const StyledContactListWrapper = Styled.div`
   padding-top: 20px;
-`;
-
-export const StyledModalWrapper = Styled.div`
-  .ant-modal-content {
-    .ant-btn {
-      border-radius: 14px;
-    }
-  }
-`;
-
-export const StyledUsername = Styled.span`
-  flex-grow: 1;
-  cursor: pointer;
-  margin-left: 10px;
 `;
 
 export const StyledIconWrapper = Styled.div`

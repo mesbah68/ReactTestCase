@@ -43,7 +43,7 @@ export const StyledProfileWrapper = Styled.div`
 export const StyledShowMoreWrapper = Styled.div`
     position: absolute;
     right: 20px;
-    top: 65px;
+    top: 72px;
     background-color: #fff;
     border-radius: 3px;
     z-index: 99;
