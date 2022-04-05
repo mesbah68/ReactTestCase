@@ -53,7 +53,7 @@ const VoiceChannels = ({ socket, voiceChannels }: Props) => {
   }
 
   const channelsList = voiceChannels.map((item: { name: string; icon: string; detail: string, id: string })  => (
-      <Group onClick={() => handleSetActiveGroup(item.name, item.id)} title={item.name} icon={item.icon} detail={item.detail} />
+      <Group onClick={() => handleSetActiveGroup(item.name, item.id)} key={item.id} title={item.name} icon={item.icon} detail={item.detail} />
   ))
 
   return (

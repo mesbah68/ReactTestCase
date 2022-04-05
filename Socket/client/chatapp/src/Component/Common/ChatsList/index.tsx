@@ -57,7 +57,7 @@ const ChatsList = ({ socket, setVisibility }: Props) => {
   }, [socket]);
 
   useEffect(() => {
-    const filteredChannels = channels.filter((channel: { name: string; }) => channel.name.toLowerCase().includes(searchedItem.toLowerCase()))
+    const filteredChannels = channels?.filter((channel: { name: string; }) => channel.name.toLowerCase().includes(searchedItem.toLowerCase()))
     setChannelsList(filteredChannels);
     if (!searchedItem) {
       setChannelsList(channels);
@@ -67,7 +67,7 @@ const ChatsList = ({ socket, setVisibility }: Props) => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
   }
-
+  console.log(channels);
   return (
         <StyledChatListWrapper>
           <Title level={4}>

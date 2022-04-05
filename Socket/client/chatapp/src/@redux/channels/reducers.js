@@ -67,12 +67,12 @@ export default function (state = initialValues, { type, payload }) {
       };
       return {
         ...state,
-        channels: [newChannel].concat(state.channels),
+        channelsList: [newChannel].concat(state.channelsList),
       };
     case types.DELETE_CHANNEL:
       return {
         ...state,
-        channels: state.channels.filter((item) => item.id !== payload),
+        channelsList: state.channelsList.filter((item) => item.id !== payload),
       };
     default:
       return state;

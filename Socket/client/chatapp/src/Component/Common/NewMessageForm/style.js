@@ -46,10 +46,10 @@ export const StyledMessageWrapper = Styled.div`
 `;
 export const StyledEmojiPickerWrapper = Styled.div`
   display: flex;
-  position: fixed;
+  position: absolute;
   z-index: 9999;
-  left: 20px;
-  bottom: 12%;
+  left: 10px;
+  bottom: 80px;
 `;
 export const StyledEmojiIcon = Styled.span`
   position: absolute;

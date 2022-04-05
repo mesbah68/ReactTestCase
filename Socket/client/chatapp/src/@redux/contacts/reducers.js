@@ -8,7 +8,6 @@ export const initialValues = {
 export default function (state = initialValues, { type, payload }) {
   switch (type) {
     case types.ADD_CONTACT:
-      const id = uuid();
       const newContact = {
         id: uuid(),
         ...payload,

@@ -1,31 +1,7 @@
 import Styled from "styled-components";
 
-export const StyledChatWrapper = Styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  background-color: #fff;
-  border-radius: 10px;
-  height: 100vh;
-  .sidebar {
-    padding: 0;
-  }
-`;
+export const StyledChatWrapper = Styled.div``;
 
-export const StyledMessageWrapper = Styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  height: 100vh;
-  background-color: #f1f4ff;
-`;
-export const StyledMessageContent = Styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  height: 100%;
-  background-color: #fafcff;
-`;
 export const StyledChatRoomHeader = Styled.div`
   display: flex;
   flex-direction: row;
@@ -34,6 +10,7 @@ export const StyledChatRoomHeader = Styled.div`
   background-color: #fff;
   padding: 15px 10px;
   margin-left: 1px;
+  margin-right: 1px;
   margin-bottom: 2px;
   border-radius: 0;
   h5 {
@@ -76,11 +53,4 @@ export const StyledShowMoreWrapper = Styled.div`
     span {
         cursor: pointer;
     }
-`;
-
-export const StyledUserWrapper = Styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
 `;

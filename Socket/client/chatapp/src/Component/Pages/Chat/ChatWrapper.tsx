@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { io, Socket } from "socket.io-client";
 import {Col, Drawer, Row} from "antd";
 
-import { UserSelectors } from "../../../@redux";
+import { UserSelectors, SidebarSelectors } from "../../../@redux";
 
 // @ts-ignore
 import { ArrowDown2TwoToneIcon, NotificationLightIcon } from "@iconbox/iconly";
@@ -13,6 +13,7 @@ import { ArrowDown2TwoToneIcon, NotificationLightIcon } from "@iconbox/iconly";
 import EnterChatForm from "../../Common/EnterChatForm";
 import ChatsList from "../../Common/ChatsList";
 import MessagesList from "../../Common/MessagesList";
+import RightSidebar from "../../Common/RightSidebar";
 
 import {
   StyledChatWrapper,
@@ -20,53 +21,49 @@ import {
 
 const ChatWrapper = () => {
   const [socket, setSocket] = useState<Socket>();
-  const [visible, setVisible] = useState(true);
+  const [chatListVisible, setChatListVisible] = useState(true);
 
   const user = useSelector(UserSelectors.getUser);
+  const sidebarTitle = useSelector(SidebarSelectors.getSidebarTitle);
 
   useEffect(() => {
     const newSocket = io("http://localhost:4002");
     setSocket(newSocket);
   }, []);
 
-  const showDrawer = () => {
-    setVisible(true);
-  };
-
   return (
-    <Row className="ant-row ant-row-center">
-      <Col span={24}>
-        <StyledChatWrapper className="font-face-gb">
-          {user.length!==0 && socket ? (
-              <Row>
-                <Col span={visible ? 6 : 0}>
-                  <Drawer
-                      placement="left"
-                      width="25%"
-                      mask={false}
-                      visible={visible}
-                      closable={false}
-                      className="sidebar"
-                      contentWrapperStyle={{boxShadow: "none"}}
-                  >
-                    <ChatsList socket={socket} setVisibility={setVisible} />
-                  </Drawer>
-                </Col>
-                <Col span={visible ? 18 : 24}>
-                  <MessagesList setSideBarVisibility={setVisible} sideBarVisibility={visible} socket={socket} />
-                </Col>
-              </Row>
-          ) : (
-              socket &&
-              user?.length === 0 && (
-                  <div>
-                    <EnterChatForm socket={socket} />
-                  </div>
-              )
-          )}
-        </StyledChatWrapper>
-      </Col>
-    </Row>
+      <StyledChatWrapper className="font-face-gb">
+        {user.length!==0 && socket ? (
+            <Row>
+              <Col span={chatListVisible ? 6 : 0}>
+                <Drawer
+                    placement="left"
+                    width="25%"
+                    mask={false}
+                    visible={chatListVisible}
+                    closable={false}
+                    className="sidebar"
+                    contentWrapperStyle={{boxShadow: "none"}}
+                >
+                  <ChatsList socket={socket} setVisibility={setChatListVisible} />
+                </Drawer>
+              </Col>
+              <Col span={chatListVisible ? 12 : 18}>
+                <MessagesList setSideBarVisibility={setChatListVisible} sideBarVisibility={chatListVisible} socket={socket} />
+              </Col>
+              <Col span={!!sidebarTitle ? 6 : 0}>
+                <RightSidebar socket={socket} sidebarTitle={sidebarTitle} />
+              </Col>
+            </Row>
+        ) : (
+            socket &&
+            user?.length === 0 && (
+                <div>
+                  <EnterChatForm socket={socket} />
+                </div>
+            )
+        )}
+      </StyledChatWrapper>
   );
 };
 

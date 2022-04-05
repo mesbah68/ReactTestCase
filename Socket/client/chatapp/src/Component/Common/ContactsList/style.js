@@ -1,7 +1,7 @@
 import Styled from "styled-components";
 
 export const StyledContactListWrapper = Styled.div`
-  padding: 10px 20px 100px;
+  padding: 10px 20px 50px;
   background-color: #fff;
   position: relative;
   overflow: auto;
@@ -34,7 +34,6 @@ export const StyledAvatarWrapper = Styled.div`
 `;
 
 export const StyledSearchWrapper = Styled.div`
-  margin-top: 20px;
   position: relative;
   input {
     border-radius: 5px;
@@ -131,7 +130,7 @@ export const StyledAddContactButton = Styled.div`
     color: #fff;
     font-size: 30px;
     span {
-        padding-top: 5px;
+        padding-bottom: 5px;
     }
 `;
 export const StyledContactWrapper = Styled.div`

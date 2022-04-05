@@ -11,8 +11,10 @@ interface Props {
   icon?: any;
 }
 
+
 const User = ({ user, icon }: Props) => {
-  return (
+
+    return (
     <StyledAvatarWrapper>
       <Avatar
         src="https://joeschmoe.io/api/v1/random"

@@ -1,19 +1,11 @@
 import Styled from "styled-components";
 
-export const StyledChatWrapper = Styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  background-color: #fff;
-  border-radius: 10px;
-  height: 100vh;
-`;
-
 export const StyledMessageWrapper = Styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
-  height: 100vh;
+  position: fixed;
+  height: 100%;
+  width: ${props => `${props.visibility ? "50%" : "75%"}`};
   background-color: #f1f4ff;
 `;
 export const StyledMessageContent = Styled.div`
@@ -32,8 +24,10 @@ export const StyledChatRoomHeader = Styled.div`
   background-color: #fff;
   padding: 15px 10px;
   margin-left: 1px;
+  margin-right: 1px;
   margin-bottom: 2px;
   border-radius: 0;
+  height: auto;
   h5 {
     margin: 0;
     padding-left: 15px;

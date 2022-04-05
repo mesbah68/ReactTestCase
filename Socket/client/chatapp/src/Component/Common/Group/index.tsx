@@ -15,9 +15,10 @@ interface Props {
   detail?: any;
   onClick?: Function;
   className?: string;
+  key?: string,
 }
 
-const Group = ({ title, icon, detail, onClick, className }: Props) => {
+const Group = ({ title, icon, detail, onClick, className, key }: Props) => {
   return (
     <StyledGroupWrapper onClick={onClick}>
       { icon && <StyledIcon className={className}>{icon}</StyledIcon> }

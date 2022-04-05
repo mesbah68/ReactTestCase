@@ -11,11 +11,10 @@ import { MoreVerticalFillIcon } from '@iconbox/eva';
 
 import { useQuery } from '@apollo/client';
 
-import { UserSelectors, useMessageActions, useUserActions, ChatSelectors } from "../../../@redux";
+import {UserSelectors, useMessageActions, useUserActions, ChatSelectors, useSidebarActions} from "../../../@redux";
 
 import Group from "../Group";
 import Messages from "../../Common/Messages";
-import ContactsList from "../../Common/ContactsList";
 
 import { getMessagesQuery } from '../../queries';
 
@@ -37,6 +36,7 @@ interface Props {
 const MessagesList = ({ socket, setSideBarVisibility, sideBarVisibility }: Props) => {
   const [showMore, setShowMore] = useState<boolean>(false);
   const { clearAllMessages, setMessages } = useMessageActions();
+  const { setSidebarTitle } = useSidebarActions();
   const { loading, data } = useQuery(getMessagesQuery);
 
   const { setUser } = useUserActions();
@@ -64,8 +64,13 @@ const MessagesList = ({ socket, setSideBarVisibility, sideBarVisibility }: Props
     setMessages([]);
   };
 
+  const handleSetSidebarTitle = (title: string) => {
+    setSidebarTitle(title);
+    setShowMore(false);
+  }
+
   return (
-      <StyledMessageWrapper>
+      <StyledMessageWrapper visibility={sideBarVisibility}>
           <StyledChatRoomHeader>
             <MenuIcon size={2.5} onClick={() => setSideBarVisibility(!sideBarVisibility)} />
             <Title level={5}>
@@ -84,22 +89,16 @@ const MessagesList = ({ socket, setSideBarVisibility, sideBarVisibility }: Props
               </StyledUserWrapper>
               {showMore &&
               <StyledShowMoreWrapper>
-                <Group title="Delete Chat" onClick={handleDeleteChat} />
-                <Group title="General Setting" />
+                <Group title="Profile" onClick={() => handleSetSidebarTitle("Profile")} />
+                <Group title="Contacts" onClick={() => handleSetSidebarTitle("Contacts")} />
+                <Group title="Setting" onClick={() => handleSetSidebarTitle("Setting")} />
                 <Group title="Logout" onClick={handleLogout} />
               </StyledShowMoreWrapper>
               }
             </StyledProfileWrapper>
           </StyledChatRoomHeader>
           <StyledMessageContent>
-            <Row>
-              <Col span={16}>
-                <Messages socket={socket} data={data} />
-              </Col>
-              <Col span={8}>
-                <ContactsList socket={socket} />
-              </Col>
-            </Row>
+            <Messages socket={socket} data={data} />
           </StyledMessageContent>
         </StyledMessageWrapper>
   );

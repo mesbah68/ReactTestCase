@@ -46,8 +46,8 @@ const Messages = ({ socket, data }: Props) => {
       <StyledMessageContent ref={messageRef}>
         {filteredMessages?.length > 0 &&
             filteredMessages?.map((message: any, index: number) => (
-            <StyledMessageItem>
-              <Message key={index} messageItems={message} socket={socket} />
+            <StyledMessageItem key={index}>
+              <Message messageItems={message} socket={socket} />
             </StyledMessageItem>
         ))}
       </StyledMessageContent>

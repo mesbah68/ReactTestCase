@@ -42,3 +42,12 @@ export { default as useActiveChatActions } from "./chat/hook";
 export { default as ChatReducers } from "./chat/reducers";
 export { default as ChatSelectors } from "./chat/selectors";
 export { default as ChatTypes } from "./chat/types";
+
+/**
+ * sidebar entity
+ */
+export { default as sidebarActions } from "./sidebar/actions";
+export { default as useSidebarActions } from "./sidebar/hook";
+export { default as SidebarReducers } from "./sidebar/reducers";
+export { default as SidebarSelectors } from "./sidebar/selectors";
+export { default as SidebarTypes } from "./sidebar/types";

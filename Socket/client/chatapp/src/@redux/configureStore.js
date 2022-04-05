@@ -8,11 +8,12 @@ import userReducer from "./user/reducers";
 import contactsReducer from "./contacts/reducers";
 import channelsReducer from "./channels/reducers";
 import chatReducer from "./chat/reducers";
+import sidebarReducer from "./sidebar/reducers";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "contacts","channels","chat"],
+  whitelist: ["user", "contacts","channels","chat", "sidebar"],
 };
 
 const configureStore = () => {
@@ -23,6 +24,7 @@ const configureStore = () => {
     user: userReducer,
     channels: channelsReducer,
     chat: chatReducer,
+    sidebar: sidebarReducer,
   });
   const persistedReducer = persistReducer(persistConfig, rootReducer);
 

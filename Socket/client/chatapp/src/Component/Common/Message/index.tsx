@@ -26,10 +26,9 @@ import {useMutation} from "@apollo/client";
 interface Prop {
   messageItems: MessageItems;
   socket: Socket,
-  key: number;
 }
 
-const Message = ({ messageItems, key, socket }: Prop) => {
+const Message = ({ messageItems, socket }: Prop) => {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [textMessage, setTextMessage] = useState("");
   const { removeMessage, editMessage } = useMessageActions();

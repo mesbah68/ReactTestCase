@@ -54,7 +54,7 @@ const ChatChannels = ({ socket, chatChannels }: Props) => {
 
   const channelsList = chatChannels.map((item: { name: string; icon: string; detail: string, id: string })  => (
       // @ts-ignore
-      <Group onClick={() => handleSetActiveGroup(item.name, item.id)} title={item.name} icon={item.icon} detail={item.detail === "star" ? <StarFillIcon /> : item.detail} />
+      <Group onClick={() => handleSetActiveGroup(item.name, item.id)} key={item.id} title={item.name} icon={item.icon} detail={item.detail === "star" ? <StarFillIcon /> : item.detail} />
   ))
 
   return (

@@ -33,15 +33,15 @@ import {
 } from "./style";
 
 interface Props {
-  socket: Socket;
+    socket: Socket;
 }
 
-const ContactsList = ({  }: Props) => {
+const ContactsList = ({ socket }: Props) => {
   const contacts = useSelector(ContactsSelectors.getContacts);
-  const { deleteContact } = useContactsActions();
-  const { updateContact } = useContactsActions();
-  const { addContact } = useContactsActions();
   const navigate = useNavigate();
+
+  const { deleteContact, updateContact, addContact } = useContactsActions();
+  const { setActiveChat } = useActiveChatActions();
 
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
@@ -51,14 +51,13 @@ const ContactsList = ({  }: Props) => {
   const [updatedContactId, setUpdatedContactId] = useState("");
   const [searchedItem, setSearchedItem] = useState("");
 
-  const { setActiveChat } = useActiveChatActions();
 
   useEffect(() => {
       setLocalContacts(contacts);
   },[contacts])
 
   useEffect(() => {
-      const filteredContacts = contacts.filter((contact: { name: string; }) => contact.name.includes(searchedItem))
+      const filteredContacts = contacts?.filter((contact: { name: string; }) => contact?.name.includes(searchedItem))
       setLocalContacts(filteredContacts);
       if (!searchedItem) {
           setLocalContacts(contacts);
@@ -71,12 +70,12 @@ const ContactsList = ({  }: Props) => {
   }
 
   const { Text } = Typography;
-  const contactsList = localContacts.map(
-    (item: { avatar: React.ReactNode; name: string; id: string }) => (
-        <StyledContactWrapper>
-            <StyledAvatarWrapper onClick={() => handleSetActiveChat(item.name,item.id) }>
-                <Avatar src={item.avatar + uuid()} size="large" >{item.name[0].toUpperCase()}</Avatar>
-                <StyledUsername>{item.name}</StyledUsername>
+  const contactsList = localContacts?.map(
+    (item: { avatar: React.ReactNode; name: string; id: string } , index : number) => (
+        <StyledContactWrapper key={index}>
+            <StyledAvatarWrapper onClick={() => handleSetActiveChat(item?.name,item?.id) }>
+                <Avatar src={item?.avatar + uuid()} size="large" >{item?.name[0].toUpperCase()}</Avatar>
+                <StyledUsername>{item?.name}</StyledUsername>
             </StyledAvatarWrapper>
             <StyledIconWrapper>
                 <EditSquareLightIcon
@@ -122,7 +121,7 @@ const ContactsList = ({  }: Props) => {
 
   const handleSearchContact = (e: any) => {
       e.preventDefault();
-      const filteredContacts = contacts.filter((contact: { name: string; }) => contact.name.includes(searchedItem))
+      const filteredContacts = contacts?.filter((contact: { name: string; }) => contact?.name.includes(searchedItem))
       setLocalContacts(filteredContacts);
       if (!searchedItem) {
           setLocalContacts(contacts);
@@ -139,9 +138,9 @@ const ContactsList = ({  }: Props) => {
         </StyledSearchWrapper>
         <StyledHeaderWrapper>
             <span>Contacts List</span>
-            <span>{contacts.length}</span>
+            <span>{contacts?.length}</span>
         </StyledHeaderWrapper>
-        <StyledContactListContent>{contactsList.length ? contactsList : "No contacts found"}</StyledContactListContent>
+        <StyledContactListContent>{contactsList?.length ? contactsList : "No contacts found"}</StyledContactListContent>
         <StyledModalWrapper>
           <Modal
               title="Add Contact"

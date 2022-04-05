@@ -12,7 +12,7 @@ export const StyledMessageContent = Styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  height: 78vh;
+  height: 100vh;
   overflow: auto;
   scrollbar-width: none; 
   ::-webkit-scrollbar {
